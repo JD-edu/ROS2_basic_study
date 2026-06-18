@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<!--
+/*MIT License
+
+Copyright (c) 2024 JD edu. http://jdedu.kr author: conner.jeong@gmail.com
+     
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+     
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+     
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN TH
+SOFTWARE.*/
+
+-->
+<robot
+  name="ros_arm">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.00022682 -0.00017814 0.014909"
+        rpy="0 0 0" />
+      <mass
+        value="0.019008" />
+      <inertia
+        ixx="1.8805E-05"
+        ixy="-7.6583E-10"
+        ixz="2.1195E-08"
+        iyy="1.8509E-05"
+        iyz="-3.3423E-08"
+        izz="3.1019E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.8 0.8 0.8 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link_1">
+    <inertial>
+      <origin
+        xyz="-7.7756E-10 0.017465 0.027545"
+        rpy="0 0 0" />
+      <mass
+        value="0.066052" />
+      <inertia
+        ixx="2.1357E-05"
+        ixy="2.9543E-12"
+        ixz="8.0357E-12"
+        iyy="1.9243E-05"
+        iyz="-2.021E-06"
+        izz="2.3357E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.8 0.8 0.8 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_1"
+    type="revolute">
+    <origin
+      xyz="0 0 0.039955"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="link_1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link_2">
+    <inertial>
+      <origin
+        xyz="-0.000181907929320544 0.0443769507690996 -0.0085382930319754"
+        rpy="0 0 0" />
+      <mass
+        value="0.0190273159446965" />
+      <inertia
+        ixx="8.74594882488797E-06"
+        ixy="1.37115985990644E-07"
+        ixz="-4.11533984366866E-08"
+        iyy="1.93086037561252E-06"
+        iyz="1.9557739081659E-06"
+        izz="7.76878615822096E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.8 0.8 0.8 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_2"
+    type="revolute">
+    <origin
+      xyz="0 0 0.045445"
+      rpy="1.5708 1.5708 0" />
+    <parent
+      link="link_1" />
+    <child
+      link="link_2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link_3">
+    <inertial>
+      <origin
+        xyz="-0.000185945263925889 0.0453619494857649 -0.00876236391120723"
+        rpy="0 0 0" />
+      <mass
+        value="0.0186141528868413" />
+      <inertia
+        ixx="8.70833213685486E-06"
+        ixy="1.37115937443114E-07"
+        ixz="-4.11533843718365E-08"
+        iyy="1.92632417274386E-06"
+        iyz="1.95577390847603E-06"
+        izz="7.72844628527868E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.8 0.8 0.8 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_3"
+    type="revolute">
+    <origin
+      xyz="0 0.07545 0"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="link_2" />
+    <child
+      link="link_3" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link_4">
+    <inertial>
+      <origin
+        xyz="0.00238354888808976 0.0406979815377837 -0.00470573522833003"
+        rpy="0 0 0" />
+      <mass
+        value="0.0228196301528819" />
+      <inertia
+        ixx="5.99210748155036E-06"
+        ixy="-3.54766402704913E-07"
+        ixz="6.68214292131051E-09"
+        iyy="1.91544656050899E-06"
+        iyz="5.72900294112311E-07"
+        izz="5.3271513117511E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.8 0.8 0.8 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_4"
+    type="revolute">
+    <origin
+      xyz="0 0.07545 0"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="link_3" />
+    <child
+      link="link_4" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link_5">
+    <inertial>
+      <origin
+        xyz="-2.99023149991084E-10 -4.22194639535314E-09 0.00251673324295842"
+        rpy="0 0 -0.085" />
+      <mass
+        value="0.000405354473062767" />
+      <inertia
+        ixx="4.75327203550509E-09"
+        ixy="7.16674452594772E-22"
+        ixz="-4.25319650811165E-16"
+        iyy="4.7532720355151E-09"
+        iyz="-6.00514311014038E-15"
+        izz="8.3329819287651E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.8 0.8 0.8 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_5"
+    type="revolute">
+    <origin
+      xyz="-0.00079998 0.06655 -0.01201"
+      rpy="0 1.5708 1.5708" />
+    <parent
+      link="link_4" />
+    <child
+      link="link_5" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link_6">
+    <inertial>
+      <origin
+        xyz="-0.0153774703200646 -0.0150318091558425 0.00793841471812814"
+        rpy="0 0 0" />
+      <mass
+        value="0.00129443286191198" />
+      <inertia
+        ixx="6.08776898854611E-08"
+        ixy="-3.45005386588659E-09"
+        ixz="4.6815158004451E-09"
+        iyy="9.34687699092981E-08"
+        iyz="1.56970312927182E-11"
+        izz="4.72247124617031E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.8 0.8 0.8 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://ros_arm/meshes/link_6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_6"
+    type="prismatic">
+    <origin
+      xyz="-0.007818 0.063831 0.018"
+      rpy="0 3.1416 1.5708" />
+    <parent
+      link="link_4" />
+    <child
+      link="link_6" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0.001"
+      upper="0.003"
+      effort="0"
+      velocity="0" />
+    <mimic
+      joint="joint_5"
+      multiplier="0.0062"
+      offset="0" />
+  </joint>
+</robot>

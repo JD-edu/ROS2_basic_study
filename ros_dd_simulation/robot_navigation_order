@@ -1,0 +1,13 @@
+1. Run following launch command. It will run gazebo simulator and load robot into gazebo. 
+
+ros2 launch ros_dd_gazebo ros_dd_xacro.launch.py 
+
+2. Run following launch command. It will run catrographer and rviz for finding robot location.
+
+ros2 launch ros_dd_cartographer ros_dd_cartograph.launch.py 
+
+3. Run following launch command. It will run rviz that let you move robot in gazebo simulator. 
+
+ros2 launch ros_dd_navigation navigation.launch.py map:=/home/jd/map.yaml
+
+The map you generate should be in /home/jd/ folder. 
