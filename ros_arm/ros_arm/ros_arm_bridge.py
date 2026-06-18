@@ -48,6 +48,7 @@ class JointStateSubscriber(Node):
         forearm = msg.position[2]*(180/3.14)
         upperarm = msg.position[3]*(180/3.14)
         self.pub_count +=1
+        # 4 axis
         if self.pub_count > 4: 
             #print(msg.position[0], msg.position[1], msg.position[2], msg.position[3],msg.position[4])
             cmd = "a"+str(int(base))+"b"+str(int(shoulder))+"c"+str(int(forearm))+"d"+str(int(upperarm))+"e\n"
