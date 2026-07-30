@@ -19,7 +19,6 @@ def generate_launch_description():
     
     # 🌟 로봇 URDF 파일 경로 정의 🌟
     # 사용자의 URDF 파일 이름이 'ros_dd.urdf'라고 가정합니다.
-    urdf_relative_path = PathJoinSubstitution(['urdf', 'ros_dd.urdf']) 
     urdf_path = os.path.join(pkg_share_dir, 'urdf', 'ros_dd.urdf')
 
     # 순수 URDF 파일을 읽어 robot_description 매개변수로 설정
