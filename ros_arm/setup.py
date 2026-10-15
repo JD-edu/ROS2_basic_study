@@ -15,6 +15,7 @@ setup(
         ('share/' + package_name + '/launch', ['launch/display_launch.py']),
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.py'))),
         (os.path.join('share', package_name, 'urdf'), glob('urdf/*')),
+        (os.path.join('share', package_name, 'mjcf'), glob('mjcf/*.xml')),
         (os.path.join('share', package_name, 'rviz'), glob('rviz/*')),
         (os.path.join('share', package_name, 'meshes'), glob('meshes/*')),
     ],
@@ -32,6 +33,8 @@ setup(
     entry_points={
         'console_scripts': [
             'ros_arm_control = ros_arm.ros_arm_bridge:main',
+            'ros_arm_mujoco_fk = ros_arm.mujoco_fk:main',
+            'ros_arm_mujoco_ik = ros_arm.mujoco_ik:main',
         ],
     },
 )

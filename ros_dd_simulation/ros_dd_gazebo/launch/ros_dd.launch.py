@@ -9,17 +9,20 @@ from launch.actions import SetEnvironmentVariable
 from launch_ros.parameter_descriptions import ParameterValue # 매개변수 값 처리를 위해 필요
 
 def generate_launch_description():
-    pkg_name = 'ros_dd_gazebo'
-    pkg_share_dir = get_package_share_directory(pkg_name)
+    # 패키지 경로 분리
+    gazebo_pkg_name = 'ros_dd_gazebo'
+    description_pkg_name = 'ros_dd_description'
+
+    gazebo_pkg_share_dir = get_package_share_directory(gazebo_pkg_name)
+    description_pkg_share_dir = get_package_share_directory(description_pkg_name)
     gazebo_ros_share_dir = get_package_share_directory('gazebo_ros')
 
     # ====================================================================
     # 1. URDF 파일 경로 정의 및 로봇 설명 매개변수 설정
     # ====================================================================
     
-    # 🌟 로봇 URDF 파일 경로 정의 🌟
-    # 사용자의 URDF 파일 이름이 'ros_dd.urdf'라고 가정합니다.
-    urdf_path = os.path.join(pkg_share_dir, 'urdf', 'ros_dd.urdf')
+    # 🌟 독립 패키지(ros_dd_description) 내의 URDF 파일 경로 지정 🌟
+    urdf_path = os.path.join(description_pkg_share_dir, 'urdf', 'ros_dd.urdf')
 
     # 순수 URDF 파일을 읽어 robot_description 매개변수로 설정
     try:
@@ -37,15 +40,21 @@ def generate_launch_description():
     # 2. 필수 환경 변수 및 기타 설정
     # ====================================================================
 
-    # 모델 경로 설정 (일반적인 Gazebo 사용을 위해 유지)
-    model_path = os.path.join(pkg_share_dir, 'models')
+    # Gazebo 모델 패스 설정: ros_dd_description의 메쉬 및 모델도 인지할 수 있도록 두 경로 모두 추가
+    gazebo_model_path = os.path.join(gazebo_pkg_share_dir, 'models')
+    description_model_path = description_pkg_share_dir # package://ros_dd_description/mesh... 등의 참조를 위한 경로
+
     set_model_path = SetEnvironmentVariable(
         name='GAZEBO_MODEL_PATH',
-        value=[model_path, os.path.pathsep, os.environ.get('GAZEBO_MODEL_PATH', '')]
+        value=[
+            gazebo_model_path, os.path.pathsep,
+            description_model_path, os.path.pathsep,
+            os.environ.get('GAZEBO_MODEL_PATH', '')
+        ]
     )
     
-    # 월드 파일 경로 설정
-    world_file = PathJoinSubstitution([pkg_share_dir, 'worlds', 'ros_dd.world'])
+    # 월드 파일 경로 설정 (ros_dd_gazebo 패키지 내부 유지)
+    world_file = PathJoinSubstitution([gazebo_pkg_share_dir, 'worlds', 'ros_dd.world'])
 
     # ====================================================================
     # 3. 노드 실행 (Gazebo 서버/클라이언트, Robot State Publisher, Model Spawner)
@@ -78,7 +87,6 @@ def generate_launch_description():
     )
 
     # 모델 스폰 노드 실행 (URDF를 Gazebo로 로드)
-    # '-topic 'robot_description'을 사용하여 URDF 모델을 스폰합니다.
     spawn_robot_node = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',

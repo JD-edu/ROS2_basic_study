@@ -1,0 +1,31 @@
+<mujoco model="ros_arm scene">
+  <include file="jdcobot10.xml"/>
+
+  <statistic center="0 0 0.10" extent="0.45"/>
+
+  <visual>
+    <headlight diffuse="0.9 0.9 0.9" ambient="0.55 0.55 0.55"
+               specular="0.2 0.2 0.2"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="160" elevation="-20"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.5 0.7 0.9"
+             rgb2="0.08 0.12 0.18" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge"
+             rgb1="0.35 0.45 0.55" rgb2="0.18 0.25 0.32"
+             markrgb="0.9 0.9 0.9" width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true"
+              texrepeat="5 5" reflectance="0.2"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"
+           diffuse="0.9 0.9 0.9" specular="0.2 0.2 0.2"/>
+    <light pos="0.3 -0.3 0.6" dir="-0.4 0.4 -1" directional="true"
+           diffuse="0.5 0.5 0.5" specular="0.1 0.1 0.1"/>
+    <geom name="floor" size="0 0 0.05" pos="0 0 0" type="plane"
+          material="groundplane" contype="0" conaffinity="0"/>
+  </worldbody>
+</mujoco>

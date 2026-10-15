@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>ros_cv_2</name>
+  <version>0.0.0</version>
+  <description>Low-latency streaming for the second camera</description>
+  <maintainer email="jd@todo.todo">jd</maintainer>
+  <license>TODO: License declaration</license>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ros_cv</exec_depend>
+  <exec_depend>astra_camera</exec_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

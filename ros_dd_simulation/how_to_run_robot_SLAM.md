@@ -1,6 +1,6 @@
 1. Run following launch command. It will run gazebo simulator and load robot into gazebo. 
 
-ros2 launch ros_dd_gazebo ros_dd_xacro.launch.py 
+ros2 launch ros_dd_gazebo ros_dd.launch.py 
 
 2. Run following launch command. It will run catrographer and rviz for finding robot location.
 

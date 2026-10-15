@@ -81,12 +81,12 @@ def generate_launch_description():
 		    }
 	    }]
         ),
-        Node(
-            package='ros_arm',
-            executable='ros_arm_control',
-            name='ros_arm_controls',
-            output='screen'
-        ),
+        #Node(
+        #    package='ros_arm',
+        #    executable='ros_arm_control',
+        #    name='ros_arm_controls',
+        #    output='screen'
+        #),
         Node(
             package='rviz2',
             executable='rviz2',

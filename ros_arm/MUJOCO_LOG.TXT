@@ -1,0 +1,8 @@
+ERROR Wed Sep 16 11:57:48 2026: could not initialize GLFW
+
+ERROR Wed Sep 16 11:57:48 2026: could not initialize GLFW
+
+ERROR Wed Sep 16 11:58:03 2026: could not initialize GLFW
+
+ERROR Wed Sep 16 11:58:04 2026: could not initialize GLFW
+

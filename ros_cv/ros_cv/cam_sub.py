@@ -1,96 +1,99 @@
-'''
-/*MIT License
+import rclpy
+from rclpy.node import Node
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
+from sensor_msgs.msg import CompressedImage
+import cv2
+import numpy as np
+import threading
+import time
 
-Copyright (c) 2024 JD edu. http://jdedu.kr author: conner.jeong@gmail.com
-     
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-     
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-     
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN TH
-SOFTWARE.*/
-'''
+class ExtremeLowLatencySub(Node):
+    def __init__(self):
+        super().__init__('cam_sub')
+        
+        # 송신단과 동일한 초저지연 QoS 프로파일
+        qos_profile = QoSProfile(
+            reliability=ReliabilityPolicy.BEST_EFFORT,  # 재전송 대기 없이 즉시 폐기
+            history=HistoryPolicy.KEEP_LAST,
+            depth=1                                     # 버퍼 크기 1
+        )
+        
+        self.subscription = self.create_subscription(
+            CompressedImage,
+            'camera/image/compressed',
+            self.listener_callback,
+            qos_profile
+        )
+        
+        # 최신 프레임 저장소 및 락(Lock)
+        self.latest_frame = None
+        self.latency_ms = 0.0
+        self.lock = threading.Lock()
+        
+        self.get_logger().info("초저지연 서브스크라이버 수신 대기 시작")
 
-# Basic ROS 2 program to subscribe to real-time streaming 
-# video from your built-in webcam
-# Author:
-# - Addison Sears-Collins
-# - https://automaticaddison.com
-  
-# Import the necessary libraries
-import rclpy # Python library for ROS 2
-from rclpy.node import Node # Handles the creation of nodes
-from sensor_msgs.msg import Image # Image is the message type
-from cv_bridge import CvBridge # Package to convert between ROS and OpenCV Images
-import cv2 # OpenCV library
- 
-class ImageSubscriber(Node):
-  """
-  Create an ImageSubscriber class, which is a subclass of the Node class.
-  """
-  def __init__(self):
-    """
-    Class constructor to set up the node
-    """
-    # Initiate the Node class's constructor and give it a name
-    super().__init__('image_subscriber')
-      
-    # Create the subscriber. This subscriber will receive an Image
-    # from the video_frames topic. The queue size is 10 messages.
-    self.subscription = self.create_subscription(
-      Image, 
-      'video_frames', 
-      self.listener_callback, 
-      10)
-    self.subscription # prevent unused variable warning
-      
-    # Used to convert between ROS and OpenCV images
-    self.br = CvBridge()
-   
-  def listener_callback(self, data):
-    """
-    Callback function.
-    """
-    # Display the message on the console
-    self.get_logger().info('Receiving video frame')
- 
-    # Convert ROS Image message to OpenCV image
-    current_frame = self.br.imgmsg_to_cv2(data)
-    
-    # Display image
-    cv2.imshow("camera", current_frame)
-    
-    cv2.waitKey(1)
-  
+    def listener_callback(self, msg):
+        """ROS2 메시지 수신 전용 콜백 (블로킹 연산 절대 금지)"""
+        # 1. 지연 시간(ms) 계산 (송신단과 PC의 시계가 동기화되어 있어야 정확함)
+        recv_time_ns = self.get_clock().now().nanoseconds
+        send_time_ns = msg.header.stamp.sec * 1_000_000_000 + msg.header.stamp.nanosec
+        diff_ms = (recv_time_ns - send_time_ns) / 1_000_000.0
+
+        # 2. 빠른 JPEG 디코딩
+        np_arr = np.frombuffer(msg.data, np.uint8)
+        frame = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+
+        if frame is not None:
+            # 3. 최신 프레임만 빠르게 덮어쓰고 콜백 즉시 종료 (imshow 금지)
+            with self.lock:
+                self.latest_frame = frame
+                self.latency_ms = diff_ms
+
+
 def main(args=None):
-  
-    # Initialize the rclpy library
     rclpy.init(args=args)
-    
-    # Create the node
-    image_subscriber = ImageSubscriber()
-    
-    # Spin the node so the callback function is called.
-    rclpy.spin(image_subscriber)
-    
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
-    image_subscriber.destroy_node()
-    
-    # Shutdown the ROS client library for Python
-    rclpy.shutdown()
-  
+    node = ExtremeLowLatencySub()
+
+    # ROS2 통신 처리를 별도 백그라운드 스레드에서 단독 실행
+    executor_thread = threading.Thread(target=rclpy.spin, args=(node,), daemon=True)
+    executor_thread.start()
+
+    print("[실행 중] 'q' 키를 누르면 종료됩니다.")
+
+    try:
+        # 메인 스레드는 화면 렌더링(cv2.imshow)만 전담
+        while rclpy.ok():
+            frame_to_show = None
+            latency = 0.0
+
+            # 최신 프레임 1장만 복사해오기
+            with node.lock:
+                if node.latest_frame is not None:
+                    frame_to_show = node.latest_frame.copy()
+                    latency = node.latency_ms
+
+            if frame_to_show is not None:
+                # 화면 좌측 상단에 지연 시간(Latency) 텍스트 출력
+                text = f"Latency: {latency:.1f} ms"
+                cv2.putText(frame_to_show, text, (20, 40), 
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2, cv2.LINE_AA)
+                
+                cv2.imshow("Extreme Low Latency Stream", frame_to_show)
+
+            # 키 입력 대기 (1ms)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+            # 렌더링 루프의 과도한 CPU 점유 방지 (약 120fps 한도)
+            time.sleep(0.005)
+
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        cv2.destroyAllWindows()
+        rclpy.shutdown()
+        executor_thread.join(timeout=1.0)
+
 if __name__ == '__main__':
     main()
