@@ -1,0 +1,36 @@
+running egg_info
+creating ../build/ros_agv/ros_agv.egg-info
+writing ../build/ros_agv/ros_agv.egg-info/PKG-INFO
+writing dependency_links to ../build/ros_agv/ros_agv.egg-info/dependency_links.txt
+writing requirements to ../build/ros_agv/ros_agv.egg-info/requires.txt
+writing top-level names to ../build/ros_agv/ros_agv.egg-info/top_level.txt
+writing manifest file '../build/ros_agv/ros_agv.egg-info/SOURCES.txt'
+reading manifest file '../build/ros_agv/ros_agv.egg-info/SOURCES.txt'
+writing manifest file '../build/ros_agv/ros_agv.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/jdedu/ros2_ws/src/build/ros_agv/build
+creating /home/jdedu/ros2_ws/src/build/ros_agv/build/lib
+creating /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv
+copying ros_agv/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv
+copying ros_agv/ros_agv_2.py -> /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv
+copying ros_agv/ros_agv.py -> /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv
+running install
+running install_lib
+creating /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv
+copying /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv
+copying /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv/ros_agv_2.py -> /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv
+copying /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv/ros_agv.py -> /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv/__init__.py to __init__.cpython-312.pyc
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv/ros_agv_2.py to ros_agv_2.cpython-312.pyc
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv/ros_agv.py to ros_agv.cpython-312.pyc
+running install_data
+creating /home/jdedu/ros2_ws/src/install/ros_agv/share/ament_index
+creating /home/jdedu/ros2_ws/src/install/ros_agv/share/ament_index/resource_index
+creating /home/jdedu/ros2_ws/src/install/ros_agv/share/ament_index/resource_index/packages
+copying resource/ros_agv -> /home/jdedu/ros2_ws/src/install/ros_agv/share/ament_index/resource_index/packages
+copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_agv/share/ros_agv
+running install_egg_info
+Copying ../build/ros_agv/ros_agv.egg-info to /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv-0.0.0-py3.12.egg-info
+running install_scripts
+writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_agv/install.log'

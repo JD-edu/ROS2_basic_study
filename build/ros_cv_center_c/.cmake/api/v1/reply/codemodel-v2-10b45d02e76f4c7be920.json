@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-91171fcb63d5e26d5482.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "ros_cv_center_c",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "center_pub::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-center_pub-8383341714a806d8e7da.json",
+					"name" : "center_pub",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "center_sub::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-center_sub-a78ed124b7bb55bc7b2c.json",
+					"name" : "center_sub",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ros_cv_center_c_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ros_cv_center_c_uninstall-8d531933f5cb70fab882.json",
+					"name" : "ros_cv_center_c_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-ac21dd0f3ec795b15216.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/jdedu/ros2_ws/src/build/ros_cv_center_c",
+		"source" : "/home/jdedu/ros2_ws/src/ros_cv_center_c"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

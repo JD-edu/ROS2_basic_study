@@ -1,0 +1,38 @@
+[2.198s] Invoking command in '/home/jdedu/ros2_ws/src/ros_agv': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jdedu/ros2_ws/src/build/ros_agv/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/ros_agv build --build-base /home/jdedu/ros2_ws/src/build/ros_agv/build install --record /home/jdedu/ros2_ws/src/build/ros_agv/install.log --install-scripts $base/lib/ros_agv --single-version-externally-managed install_data
+[2.495s] running egg_info
+[2.496s] creating ../build/ros_agv/ros_agv.egg-info
+[2.518s] writing ../build/ros_agv/ros_agv.egg-info/PKG-INFO
+[2.518s] writing dependency_links to ../build/ros_agv/ros_agv.egg-info/dependency_links.txt
+[2.518s] writing requirements to ../build/ros_agv/ros_agv.egg-info/requires.txt
+[2.518s] writing top-level names to ../build/ros_agv/ros_agv.egg-info/top_level.txt
+[2.518s] writing manifest file '../build/ros_agv/ros_agv.egg-info/SOURCES.txt'
+[2.559s] reading manifest file '../build/ros_agv/ros_agv.egg-info/SOURCES.txt'
+[2.561s] writing manifest file '../build/ros_agv/ros_agv.egg-info/SOURCES.txt'
+[2.561s] running build
+[2.561s] running build_py
+[2.561s] creating /home/jdedu/ros2_ws/src/build/ros_agv/build
+[2.561s] creating /home/jdedu/ros2_ws/src/build/ros_agv/build/lib
+[2.561s] creating /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv
+[2.561s] copying ros_agv/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv
+[2.565s] copying ros_agv/ros_agv_2.py -> /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv
+[2.565s] copying ros_agv/ros_agv.py -> /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv
+[2.565s] running install
+[2.568s] running install_lib
+[2.588s] creating /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv
+[2.588s] copying /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv
+[2.588s] copying /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv/ros_agv_2.py -> /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv
+[2.588s] copying /home/jdedu/ros2_ws/src/build/ros_agv/build/lib/ros_agv/ros_agv.py -> /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv
+[2.589s] byte-compiling /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv/__init__.py to __init__.cpython-312.pyc
+[2.589s] byte-compiling /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv/ros_agv_2.py to ros_agv_2.cpython-312.pyc
+[2.591s] byte-compiling /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv/ros_agv.py to ros_agv.cpython-312.pyc
+[2.593s] running install_data
+[2.593s] creating /home/jdedu/ros2_ws/src/install/ros_agv/share/ament_index
+[2.593s] creating /home/jdedu/ros2_ws/src/install/ros_agv/share/ament_index/resource_index
+[2.593s] creating /home/jdedu/ros2_ws/src/install/ros_agv/share/ament_index/resource_index/packages
+[2.593s] copying resource/ros_agv -> /home/jdedu/ros2_ws/src/install/ros_agv/share/ament_index/resource_index/packages
+[2.593s] copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_agv/share/ros_agv
+[2.593s] running install_egg_info
+[2.616s] Copying ../build/ros_agv/ros_agv.egg-info to /home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages/ros_agv-0.0.0-py3.12.egg-info
+[2.617s] running install_scripts
+[2.776s] writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_agv/install.log'
+[3.009s] Invoked command in '/home/jdedu/ros2_ws/src/ros_agv' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jdedu/ros2_ws/src/build/ros_agv/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jdedu/ros2_ws/src/install/ros_agv/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/ros_agv build --build-base /home/jdedu/ros2_ws/src/build/ros_agv/build install --record /home/jdedu/ros2_ws/src/build/ros_agv/install.log --install-scripts $base/lib/ros_agv --single-version-externally-managed install_data

@@ -1,0 +1,14 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from cv_msg/msg/MsgCenter.msg
+// generated code does not contain a copyright notice
+
+
+module cv_msg {
+  module msg {
+    struct MsgCenter {
+      int64 x;
+
+      int64 y;
+    };
+  };
+};

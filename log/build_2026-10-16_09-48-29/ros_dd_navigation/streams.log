@@ -1,0 +1,36 @@
+[2.211s] Invoking command in '/home/jdedu/ros2_ws/src/ros_dd_simulation/ros_dd_navigation': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jdedu/ros2_ws/src/build/ros_dd_navigation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jdedu/ros2_ws/src/install/ros_dd_navigation/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ros_dd_navigation build --build-base /home/jdedu/ros2_ws/src/build/ros_dd_navigation/build install --record /home/jdedu/ros2_ws/src/build/ros_dd_navigation/install.log --install-scripts $base/lib/ros_dd_navigation --single-version-externally-managed install_data
+[2.685s] running egg_info
+[2.685s] creating ../../build/ros_dd_navigation/ros_dd_navigation.egg-info
+[2.685s] writing ../../build/ros_dd_navigation/ros_dd_navigation.egg-info/PKG-INFO
+[2.685s] writing dependency_links to ../../build/ros_dd_navigation/ros_dd_navigation.egg-info/dependency_links.txt
+[2.685s] writing requirements to ../../build/ros_dd_navigation/ros_dd_navigation.egg-info/requires.txt
+[2.685s] writing top-level names to ../../build/ros_dd_navigation/ros_dd_navigation.egg-info/top_level.txt
+[2.685s] writing manifest file '../../build/ros_dd_navigation/ros_dd_navigation.egg-info/SOURCES.txt'
+[2.685s] reading manifest file '../../build/ros_dd_navigation/ros_dd_navigation.egg-info/SOURCES.txt'
+[2.685s] writing manifest file '../../build/ros_dd_navigation/ros_dd_navigation.egg-info/SOURCES.txt'
+[2.685s] running build
+[2.685s] running build_py
+[2.685s] creating /home/jdedu/ros2_ws/src/build/ros_dd_navigation/build
+[2.685s] creating /home/jdedu/ros2_ws/src/build/ros_dd_navigation/build/lib
+[2.686s] creating /home/jdedu/ros2_ws/src/build/ros_dd_navigation/build/lib/ros_dd_navigation
+[2.686s] copying ros_dd_navigation/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_dd_navigation/build/lib/ros_dd_navigation
+[2.686s] running install
+[2.686s] running install_lib
+[2.686s] creating /home/jdedu/ros2_ws/src/install/ros_dd_navigation/lib/python3.12/site-packages/ros_dd_navigation
+[2.686s] copying /home/jdedu/ros2_ws/src/build/ros_dd_navigation/build/lib/ros_dd_navigation/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_dd_navigation/lib/python3.12/site-packages/ros_dd_navigation
+[2.686s] byte-compiling /home/jdedu/ros2_ws/src/install/ros_dd_navigation/lib/python3.12/site-packages/ros_dd_navigation/__init__.py to __init__.cpython-312.pyc
+[2.686s] running install_data
+[2.686s] creating /home/jdedu/ros2_ws/src/install/ros_dd_navigation/share/ament_index
+[2.686s] creating /home/jdedu/ros2_ws/src/install/ros_dd_navigation/share/ament_index/resource_index
+[2.686s] creating /home/jdedu/ros2_ws/src/install/ros_dd_navigation/share/ament_index/resource_index/packages
+[2.686s] copying resource/ros_dd_navigation -> /home/jdedu/ros2_ws/src/install/ros_dd_navigation/share/ament_index/resource_index/packages
+[2.686s] copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_dd_navigation/share/ros_dd_navigation
+[2.686s] creating /home/jdedu/ros2_ws/src/install/ros_dd_navigation/share/ros_dd_navigation/launch
+[2.686s] copying launch/navigation.launch.py -> /home/jdedu/ros2_ws/src/install/ros_dd_navigation/share/ros_dd_navigation/launch
+[2.686s] creating /home/jdedu/ros2_ws/src/install/ros_dd_navigation/share/ros_dd_navigation/config
+[2.686s] copying config/nav2_params.yaml -> /home/jdedu/ros2_ws/src/install/ros_dd_navigation/share/ros_dd_navigation/config
+[2.687s] running install_egg_info
+[2.687s] Copying ../../build/ros_dd_navigation/ros_dd_navigation.egg-info to /home/jdedu/ros2_ws/src/install/ros_dd_navigation/lib/python3.12/site-packages/ros_dd_navigation-0.0.0-py3.12.egg-info
+[2.687s] running install_scripts
+[2.748s] writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_dd_navigation/install.log'
+[3.008s] Invoked command in '/home/jdedu/ros2_ws/src/ros_dd_simulation/ros_dd_navigation' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jdedu/ros2_ws/src/build/ros_dd_navigation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jdedu/ros2_ws/src/install/ros_dd_navigation/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ros_dd_navigation build --build-base /home/jdedu/ros2_ws/src/build/ros_dd_navigation/build install --record /home/jdedu/ros2_ws/src/build/ros_dd_navigation/install.log --install-scripts $base/lib/ros_dd_navigation --single-version-externally-managed install_data

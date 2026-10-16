@@ -1,0 +1,81 @@
+running egg_info
+creating ../build/ros_arm/ros_arm.egg-info
+writing ../build/ros_arm/ros_arm.egg-info/PKG-INFO
+writing dependency_links to ../build/ros_arm/ros_arm.egg-info/dependency_links.txt
+writing entry points to ../build/ros_arm/ros_arm.egg-info/entry_points.txt
+writing requirements to ../build/ros_arm/ros_arm.egg-info/requires.txt
+writing top-level names to ../build/ros_arm/ros_arm.egg-info/top_level.txt
+writing manifest file '../build/ros_arm/ros_arm.egg-info/SOURCES.txt'
+reading manifest file '../build/ros_arm/ros_arm.egg-info/SOURCES.txt'
+writing manifest file '../build/ros_arm/ros_arm.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/jdedu/ros2_ws/src/build/ros_arm/build
+creating /home/jdedu/ros2_ws/src/build/ros_arm/build/lib
+creating /home/jdedu/ros2_ws/src/build/ros_arm/build/lib/ros_arm
+copying ros_arm/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_arm/build/lib/ros_arm
+copying ros_arm/ros_arm_bridge.py -> /home/jdedu/ros2_ws/src/build/ros_arm/build/lib/ros_arm
+running install
+running install_lib
+creating /home/jdedu/ros2_ws/src/install/ros_arm/lib/python3.12/site-packages/ros_arm
+copying /home/jdedu/ros2_ws/src/build/ros_arm/build/lib/ros_arm/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_arm/lib/python3.12/site-packages/ros_arm
+copying /home/jdedu/ros2_ws/src/build/ros_arm/build/lib/ros_arm/ros_arm_bridge.py -> /home/jdedu/ros2_ws/src/install/ros_arm/lib/python3.12/site-packages/ros_arm
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_arm/lib/python3.12/site-packages/ros_arm/__init__.py to __init__.cpython-312.pyc
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_arm/lib/python3.12/site-packages/ros_arm/ros_arm_bridge.py to ros_arm_bridge.cpython-312.pyc
+running install_data
+creating /home/jdedu/ros2_ws/src/install/ros_arm/share/ament_index
+creating /home/jdedu/ros2_ws/src/install/ros_arm/share/ament_index/resource_index
+creating /home/jdedu/ros2_ws/src/install/ros_arm/share/ament_index/resource_index/packages
+copying resource/ros_arm -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ament_index/resource_index/packages
+copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm
+creating /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/launch
+copying launch/display_launch.py -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/launch
+creating /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/urdf
+copying urdf/ros_arm.urdf -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/urdf
+creating /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/rviz
+creating /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__8.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__5.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__10.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_3_pe_a.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__6.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__3.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__12.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__4.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__11.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/shoulder.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/arm_1.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/shoulder.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/base.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/base_link.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__10.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/shoulder_top.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__2.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__11.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__2.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/arm_end.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__7.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__12.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_3_pe_a.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__6.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/arm_end.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__9.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/base_link.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__13.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/base.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__4.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__3.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__8.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__13.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/arm_1.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/shoulder_top.stl -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__9.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__7.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+copying meshes/sg90___micro_servo_9g___tower_pro_1_pe_a__5.part -> /home/jdedu/ros2_ws/src/install/ros_arm/share/ros_arm/meshes
+running install_egg_info
+Copying ../build/ros_arm/ros_arm.egg-info to /home/jdedu/ros2_ws/src/install/ros_arm/lib/python3.12/site-packages/ros_arm-0.0.0-py3.12.egg-info
+running install_scripts
+Installing ros_arm_control script to /home/jdedu/ros2_ws/src/install/ros_arm/lib/ros_arm
+writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_arm/install.log'

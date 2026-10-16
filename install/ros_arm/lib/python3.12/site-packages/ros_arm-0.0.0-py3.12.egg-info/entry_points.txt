@@ -1,0 +1,2 @@
+[console_scripts]
+ros_arm_control = ros_arm.ros_arm_bridge:main

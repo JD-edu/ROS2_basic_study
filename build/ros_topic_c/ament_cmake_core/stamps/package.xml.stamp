@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <!-- 패키지 기본 정보 -->
+  <name>ros_topic_c</name>
+  <version>1.0.0</version>
+  <description>ROS2 C++ Hello World Publisher and Subscriber example</description>
+  <maintainer email="user@example.com">Your Name</maintainer>
+  <license>Apache License 2.0</license>
+
+  <!-- 빌드 도구 의존성 -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- 컴파일 시 의존성 -->
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+
+  <!-- 테스트 의존성 -->
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <!-- 빌드 타입 지정 -->
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

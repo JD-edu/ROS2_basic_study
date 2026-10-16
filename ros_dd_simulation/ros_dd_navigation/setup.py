@@ -14,7 +14,9 @@ setup(
         ('share/' + package_name, ['package.xml']),
         # 🌟 Launch 파일 설치
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.py'))),
-        # 🌟 Config 파일 설치 (nav2_params.yaml)
+        (os.path.join('share', package_name, 'maps'), glob('maps/*')),
+        (os.path.join('share', package_name, 'rviz'), glob('rviz/*.rviz')),
+        # Config files
         (os.path.join('share', package_name, 'config'), glob(os.path.join('config', '*.yaml'))),
 
     ],

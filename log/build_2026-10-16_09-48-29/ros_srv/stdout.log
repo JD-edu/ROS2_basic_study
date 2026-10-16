@@ -1,0 +1,39 @@
+running egg_info
+creating ../build/ros_srv/ros_srv.egg-info
+writing ../build/ros_srv/ros_srv.egg-info/PKG-INFO
+writing dependency_links to ../build/ros_srv/ros_srv.egg-info/dependency_links.txt
+writing entry points to ../build/ros_srv/ros_srv.egg-info/entry_points.txt
+writing requirements to ../build/ros_srv/ros_srv.egg-info/requires.txt
+writing top-level names to ../build/ros_srv/ros_srv.egg-info/top_level.txt
+writing manifest file '../build/ros_srv/ros_srv.egg-info/SOURCES.txt'
+reading manifest file '../build/ros_srv/ros_srv.egg-info/SOURCES.txt'
+writing manifest file '../build/ros_srv/ros_srv.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/jdedu/ros2_ws/src/build/ros_srv/build
+creating /home/jdedu/ros2_ws/src/build/ros_srv/build/lib
+creating /home/jdedu/ros2_ws/src/build/ros_srv/build/lib/ros_srv
+copying ros_srv/client.py -> /home/jdedu/ros2_ws/src/build/ros_srv/build/lib/ros_srv
+copying ros_srv/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_srv/build/lib/ros_srv
+copying ros_srv/server.py -> /home/jdedu/ros2_ws/src/build/ros_srv/build/lib/ros_srv
+running install
+running install_lib
+creating /home/jdedu/ros2_ws/src/install/ros_srv/lib/python3.12/site-packages/ros_srv
+copying /home/jdedu/ros2_ws/src/build/ros_srv/build/lib/ros_srv/client.py -> /home/jdedu/ros2_ws/src/install/ros_srv/lib/python3.12/site-packages/ros_srv
+copying /home/jdedu/ros2_ws/src/build/ros_srv/build/lib/ros_srv/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_srv/lib/python3.12/site-packages/ros_srv
+copying /home/jdedu/ros2_ws/src/build/ros_srv/build/lib/ros_srv/server.py -> /home/jdedu/ros2_ws/src/install/ros_srv/lib/python3.12/site-packages/ros_srv
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_srv/lib/python3.12/site-packages/ros_srv/client.py to client.cpython-312.pyc
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_srv/lib/python3.12/site-packages/ros_srv/__init__.py to __init__.cpython-312.pyc
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_srv/lib/python3.12/site-packages/ros_srv/server.py to server.cpython-312.pyc
+running install_data
+creating /home/jdedu/ros2_ws/src/install/ros_srv/share/ament_index
+creating /home/jdedu/ros2_ws/src/install/ros_srv/share/ament_index/resource_index
+creating /home/jdedu/ros2_ws/src/install/ros_srv/share/ament_index/resource_index/packages
+copying resource/ros_srv -> /home/jdedu/ros2_ws/src/install/ros_srv/share/ament_index/resource_index/packages
+copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_srv/share/ros_srv
+running install_egg_info
+Copying ../build/ros_srv/ros_srv.egg-info to /home/jdedu/ros2_ws/src/install/ros_srv/lib/python3.12/site-packages/ros_srv-0.0.0-py3.12.egg-info
+running install_scripts
+Installing client script to /home/jdedu/ros2_ws/src/install/ros_srv/lib/ros_srv
+Installing server script to /home/jdedu/ros2_ws/src/install/ros_srv/lib/ros_srv
+writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_srv/install.log'

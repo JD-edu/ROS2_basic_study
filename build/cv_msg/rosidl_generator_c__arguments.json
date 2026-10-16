@@ -1,0 +1,52 @@
+{
+  "package_name": "cv_msg",
+  "output_dir": "/home/jdedu/ros2_ws/src/build/cv_msg/rosidl_generator_c/cv_msg",
+  "template_dir": "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource",
+  "idl_tuples": [
+    "/home/jdedu/ros2_ws/src/build/cv_msg/rosidl_adapter/cv_msg:msg/MsgCenter.idl",
+    "/home/jdedu/ros2_ws/src/build/cv_msg/rosidl_adapter/cv_msg:srv/SrvAddint.idl",
+    "/home/jdedu/ros2_ws/src/build/cv_msg/rosidl_adapter/cv_msg:srv/SrvArduino.idl"
+  ],
+  "ros_interface_files": [
+    "/home/jdedu/ros2_ws/src/cv_msg/msg/MsgCenter.msg",
+    "/home/jdedu/ros2_ws/src/cv_msg/srv/SrvAddint.srv",
+    "/home/jdedu/ros2_ws/src/cv_msg/srv/SrvArduino.srv"
+  ],
+  "ros_interface_dependencies": [
+    "service_msgs:/opt/ros/jazzy/share/service_msgs/msg/ServiceEventInfo.idl",
+    "builtin_interfaces:/opt/ros/jazzy/share/builtin_interfaces/msg/Duration.idl",
+    "builtin_interfaces:/opt/ros/jazzy/share/builtin_interfaces/msg/Time.idl"
+  ],
+  "target_dependencies": [
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../../../lib/rosidl_generator_c/rosidl_generator_c",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../../../lib/python3.12/site-packages/rosidl_generator_c/__init__.py",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/action__type_support.h.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/action__type_support.c.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/empty__description.c.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/full__description.c.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/idl.h.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/idl__description.c.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/idl__functions.c.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/idl__functions.h.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/idl__struct.h.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/idl__type_support.c.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/idl__type_support.h.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/msg__functions.c.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/msg__functions.h.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/msg__struct.h.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/msg__type_support.h.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/srv__type_support.c.em",
+    "/opt/ros/jazzy/share/rosidl_generator_c/cmake/../resource/srv__type_support.h.em",
+    "/home/jdedu/ros2_ws/src/build/cv_msg/rosidl_adapter/cv_msg/msg/MsgCenter.idl",
+    "/home/jdedu/ros2_ws/src/build/cv_msg/rosidl_adapter/cv_msg/srv/SrvAddint.idl",
+    "/home/jdedu/ros2_ws/src/build/cv_msg/rosidl_adapter/cv_msg/srv/SrvArduino.idl",
+    "/opt/ros/jazzy/share/service_msgs/msg/ServiceEventInfo.idl",
+    "/opt/ros/jazzy/share/builtin_interfaces/msg/Duration.idl",
+    "/opt/ros/jazzy/share/builtin_interfaces/msg/Time.idl"
+  ],
+  "type_description_tuples": [
+    "msg/MsgCenter.idl:/home/jdedu/ros2_ws/src/build/cv_msg/rosidl_generator_type_description/cv_msg/msg/MsgCenter.json",
+    "srv/SrvAddint.idl:/home/jdedu/ros2_ws/src/build/cv_msg/rosidl_generator_type_description/cv_msg/srv/SrvAddint.json",
+    "srv/SrvArduino.idl:/home/jdedu/ros2_ws/src/build/cv_msg/rosidl_generator_type_description/cv_msg/srv/SrvArduino.json"
+  ]
+}

@@ -1,0 +1,2 @@
+[console_scripts]
+goto_pose = ros_dd_nav2.goto_pose:main

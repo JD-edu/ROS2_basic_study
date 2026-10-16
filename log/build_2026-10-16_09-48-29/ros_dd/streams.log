@@ -1,0 +1,38 @@
+[2.147s] Invoking command in '/home/jdedu/ros2_ws/src/ros_dd': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jdedu/ros2_ws/src/build/ros_dd/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jdedu/ros2_ws/src/install/ros_dd/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/ros_dd build --build-base /home/jdedu/ros2_ws/src/build/ros_dd/build install --record /home/jdedu/ros2_ws/src/build/ros_dd/install.log --install-scripts $base/lib/ros_dd --single-version-externally-managed install_data
+[2.417s] running egg_info
+[2.417s] creating ../build/ros_dd/ros_dd.egg-info
+[2.435s] writing ../build/ros_dd/ros_dd.egg-info/PKG-INFO
+[2.435s] writing dependency_links to ../build/ros_dd/ros_dd.egg-info/dependency_links.txt
+[2.435s] writing requirements to ../build/ros_dd/ros_dd.egg-info/requires.txt
+[2.436s] writing top-level names to ../build/ros_dd/ros_dd.egg-info/top_level.txt
+[2.436s] writing manifest file '../build/ros_dd/ros_dd.egg-info/SOURCES.txt'
+[2.473s] reading manifest file '../build/ros_dd/ros_dd.egg-info/SOURCES.txt'
+[2.474s] writing manifest file '../build/ros_dd/ros_dd.egg-info/SOURCES.txt'
+[2.474s] running build
+[2.474s] running build_py
+[2.474s] creating /home/jdedu/ros2_ws/src/build/ros_dd/build
+[2.474s] creating /home/jdedu/ros2_ws/src/build/ros_dd/build/lib
+[2.474s] creating /home/jdedu/ros2_ws/src/build/ros_dd/build/lib/ros_dd
+[2.475s] copying ros_dd/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_dd/build/lib/ros_dd
+[2.475s] running install
+[2.483s] running install_lib
+[2.502s] creating /home/jdedu/ros2_ws/src/install/ros_dd/lib/python3.12/site-packages/ros_dd
+[2.503s] copying /home/jdedu/ros2_ws/src/build/ros_dd/build/lib/ros_dd/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_dd/lib/python3.12/site-packages/ros_dd
+[2.503s] byte-compiling /home/jdedu/ros2_ws/src/install/ros_dd/lib/python3.12/site-packages/ros_dd/__init__.py to __init__.cpython-312.pyc
+[2.503s] running install_data
+[2.504s] creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ament_index
+[2.504s] creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ament_index/resource_index
+[2.504s] creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ament_index/resource_index/packages
+[2.504s] copying resource/ros_dd -> /home/jdedu/ros2_ws/src/install/ros_dd/share/ament_index/resource_index/packages
+[2.504s] copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd
+[2.504s] creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/launch
+[2.504s] copying launch/rosdd_launch.py -> /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/launch
+[2.504s] creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/urdf
+[2.504s] copying urdf/ros_dd.urdf -> /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/urdf
+[2.505s] creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/rviz
+[2.507s] copying rviz/ros_dd.rviz -> /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/rviz
+[2.507s] running install_egg_info
+[2.524s] Copying ../build/ros_dd/ros_dd.egg-info to /home/jdedu/ros2_ws/src/install/ros_dd/lib/python3.12/site-packages/ros_dd-0.0.0-py3.12.egg-info
+[2.525s] running install_scripts
+[2.660s] writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_dd/install.log'
+[2.950s] Invoked command in '/home/jdedu/ros2_ws/src/ros_dd' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jdedu/ros2_ws/src/build/ros_dd/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jdedu/ros2_ws/src/install/ros_dd/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/ros_dd build --build-base /home/jdedu/ros2_ws/src/build/ros_dd/build install --record /home/jdedu/ros2_ws/src/build/ros_dd/install.log --install-scripts $base/lib/ros_dd --single-version-externally-managed install_data

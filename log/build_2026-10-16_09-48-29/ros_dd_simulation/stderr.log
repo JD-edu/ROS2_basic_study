@@ -1,0 +1,2 @@
+WARNING: Metapackage "ros_dd_simulation" must buildtool_depend on catkin.
+WARNING: Metapackage "ros_dd_simulation" should not have other dependencies besides a buildtool_depend on catkin and exec_depends.

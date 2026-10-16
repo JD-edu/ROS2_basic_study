@@ -1,0 +1,15 @@
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ament_index/resource_index/package_run_dependencies/ros_dd_simulation
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ament_index/resource_index/parent_prefix_path/ros_dd_simulation
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/environment/ament_prefix_path.sh
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/environment/ament_prefix_path.dsv
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/environment/path.sh
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/environment/path.dsv
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/local_setup.bash
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/local_setup.sh
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/local_setup.zsh
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/local_setup.dsv
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/package.dsv
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ament_index/resource_index/packages/ros_dd_simulation
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/cmake/ros_dd_simulationConfig.cmake
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/cmake/ros_dd_simulationConfig-version.cmake
+/home/jdedu/ros2_ws/src/install/ros_dd_simulation/share/ros_dd_simulation/package.xml

@@ -1,0 +1,60 @@
+[0.012s] Invoking command in '/home/jdedu/ros2_ws/src/build/ros_srv_c': AMENT_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/jdedu/ros2_ws/src/ros_srv_c -DCMAKE_INSTALL_PREFIX=/home/jdedu/ros2_ws/src/install/ros_srv_c
+[0.078s] -- The C compiler identification is GNU 13.3.0
+[0.147s] -- The CXX compiler identification is GNU 13.3.0
+[0.163s] -- Detecting C compiler ABI info
+[0.261s] -- Detecting C compiler ABI info - done
+[0.268s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.269s] -- Detecting C compile features
+[0.269s] -- Detecting C compile features - done
+[0.277s] -- Detecting CXX compiler ABI info
+[0.395s] -- Detecting CXX compiler ABI info - done
+[0.404s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.405s] -- Detecting CXX compile features
+[0.405s] -- Detecting CXX compile features - done
+[0.408s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.589s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.716s] -- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+[0.759s] -- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[0.773s] -- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[0.790s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.811s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.903s] -- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[0.906s] -- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[1.004s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[1.029s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[1.057s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.151s] -- Found cv_msg: 0.0.0 (/home/jdedu/ros2_ws/src/install/cv_msg/share/cv_msg/cmake)
+[1.283s] -- Configuring done (1.3s)
+[1.300s] -- Generating done (0.0s)
+[1.306s] -- Build files have been written to: /home/jdedu/ros2_ws/src/build/ros_srv_c
+[1.322s] Invoked command in '/home/jdedu/ros2_ws/src/build/ros_srv_c' returned '0': AMENT_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/jdedu/ros2_ws/src/ros_srv_c -DCMAKE_INSTALL_PREFIX=/home/jdedu/ros2_ws/src/install/ros_srv_c
+[1.323s] Invoking command in '/home/jdedu/ros2_ws/src/build/ros_srv_c': AMENT_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/jdedu/ros2_ws/src/build/ros_srv_c -- -j16 -l16
+[1.390s] [ 50%] [32mBuilding CXX object CMakeFiles/client.dir/src/client.cpp.o[0m
+[1.390s] [ 50%] [32mBuilding CXX object CMakeFiles/server.dir/src/server.cpp.o[0m
+[5.310s] [ 75%] [32m[1mLinking CXX executable client[0m
+[5.467s] [ 75%] Built target client
+[5.614s] [100%] [32m[1mLinking CXX executable server[0m
+[5.755s] [100%] Built target server
+[5.769s] Invoked command in '/home/jdedu/ros2_ws/src/build/ros_srv_c' returned '0': AMENT_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/jdedu/ros2_ws/src/build/ros_srv_c -- -j16 -l16
+[5.771s] Invoking command in '/home/jdedu/ros2_ws/src/build/ros_srv_c': AMENT_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/jdedu/ros2_ws/src/build/ros_srv_c
+[5.778s] -- Install configuration: ""
+[5.779s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/lib/ros_srv_c/server
+[5.779s] -- Set non-toolchain portion of runtime path of "/home/jdedu/ros2_ws/src/install/ros_srv_c/lib/ros_srv_c/server" to ""
+[5.779s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/lib/ros_srv_c/client
+[5.780s] -- Set non-toolchain portion of runtime path of "/home/jdedu/ros2_ws/src/install/ros_srv_c/lib/ros_srv_c/client" to ""
+[5.781s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ament_index/resource_index/package_run_dependencies/ros_srv_c
+[5.781s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ament_index/resource_index/parent_prefix_path/ros_srv_c
+[5.781s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/environment/ament_prefix_path.sh
+[5.781s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/environment/ament_prefix_path.dsv
+[5.781s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/environment/path.sh
+[5.781s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/environment/path.dsv
+[5.781s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/local_setup.bash
+[5.781s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/local_setup.sh
+[5.782s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/local_setup.zsh
+[5.782s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/local_setup.dsv
+[5.782s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/package.dsv
+[5.782s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ament_index/resource_index/packages/ros_srv_c
+[5.782s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/cmake/ros_srv_cConfig.cmake
+[5.782s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/cmake/ros_srv_cConfig-version.cmake
+[5.782s] -- Installing: /home/jdedu/ros2_ws/src/install/ros_srv_c/share/ros_srv_c/package.xml
+[5.785s] Invoked command in '/home/jdedu/ros2_ws/src/build/ros_srv_c' returned '0': AMENT_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jdedu/ros2_ws/src/install/cv_msg:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jdedu/ros2_ws/src/install/cv_msg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/jdedu/ros2_ws/src/build/ros_srv_c

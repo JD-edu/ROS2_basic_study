@@ -24,7 +24,7 @@ class ASDWTeleop(Node):
     def __init__(self):
         super().__init__('asdw_teleop_node')
         # 🌟 로봇 제어 토픽에 맞는 Publisher 생성 🌟
-        # ros_dd_gazebo의 differential_drive_controller는 기본적으로 /cmd_vel을 구독합니다.
+        # Harmonic DiffDrive receives /cmd_vel through ros_gz_bridge.
         self.publisher_ = self.create_publisher(Twist, 'cmd_vel', 10)
         self.settings = self.save_terminal_settings()
         self.get_logger().info(MSG)

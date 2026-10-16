@@ -1,0 +1,35 @@
+running egg_info
+creating ../../build/ros_dd_teleop/ros_dd_teleop.egg-info
+writing ../../build/ros_dd_teleop/ros_dd_teleop.egg-info/PKG-INFO
+writing dependency_links to ../../build/ros_dd_teleop/ros_dd_teleop.egg-info/dependency_links.txt
+writing entry points to ../../build/ros_dd_teleop/ros_dd_teleop.egg-info/entry_points.txt
+writing requirements to ../../build/ros_dd_teleop/ros_dd_teleop.egg-info/requires.txt
+writing top-level names to ../../build/ros_dd_teleop/ros_dd_teleop.egg-info/top_level.txt
+writing manifest file '../../build/ros_dd_teleop/ros_dd_teleop.egg-info/SOURCES.txt'
+reading manifest file '../../build/ros_dd_teleop/ros_dd_teleop.egg-info/SOURCES.txt'
+writing manifest file '../../build/ros_dd_teleop/ros_dd_teleop.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build
+creating /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib
+creating /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib/ros_dd_teleop
+copying ros_dd_teleop/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib/ros_dd_teleop
+copying ros_dd_teleop/ros_dd_teleop.py -> /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib/ros_dd_teleop
+running install
+running install_lib
+creating /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop
+copying /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib/ros_dd_teleop/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop
+copying /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib/ros_dd_teleop/ros_dd_teleop.py -> /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop/__init__.py to __init__.cpython-312.pyc
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop/ros_dd_teleop.py to ros_dd_teleop.cpython-312.pyc
+running install_data
+creating /home/jdedu/ros2_ws/src/install/ros_dd_teleop/share/ament_index
+creating /home/jdedu/ros2_ws/src/install/ros_dd_teleop/share/ament_index/resource_index
+creating /home/jdedu/ros2_ws/src/install/ros_dd_teleop/share/ament_index/resource_index/packages
+copying resource/ros_dd_teleop -> /home/jdedu/ros2_ws/src/install/ros_dd_teleop/share/ament_index/resource_index/packages
+copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_dd_teleop/share/ros_dd_teleop
+running install_egg_info
+Copying ../../build/ros_dd_teleop/ros_dd_teleop.egg-info to /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop-0.0.0-py3.12.egg-info
+running install_scripts
+Installing asdw_teleop script to /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/ros_dd_teleop
+writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_dd_teleop/install.log'

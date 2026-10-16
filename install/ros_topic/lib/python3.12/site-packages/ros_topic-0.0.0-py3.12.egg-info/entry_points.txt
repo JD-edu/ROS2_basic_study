@@ -1,0 +1,3 @@
+[console_scripts]
+listener = ros_topic.ros_topic_sub:main
+talker = ros_topic.ros_topic_pub:main

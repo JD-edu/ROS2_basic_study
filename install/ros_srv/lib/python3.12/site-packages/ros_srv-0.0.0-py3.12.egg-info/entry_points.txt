@@ -1,0 +1,3 @@
+[console_scripts]
+client = ros_srv.client:main
+server = ros_srv.server:main

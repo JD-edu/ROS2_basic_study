@@ -1,0 +1,17 @@
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/lib/ros_cv_center_c/center_pub
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/lib/ros_cv_center_c/center_sub
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ament_index/resource_index/package_run_dependencies/ros_cv_center_c
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ament_index/resource_index/parent_prefix_path/ros_cv_center_c
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/environment/ament_prefix_path.sh
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/environment/ament_prefix_path.dsv
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/environment/path.sh
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/environment/path.dsv
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/local_setup.bash
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/local_setup.sh
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/local_setup.zsh
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/local_setup.dsv
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/package.dsv
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ament_index/resource_index/packages/ros_cv_center_c
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/cmake/ros_cv_center_cConfig.cmake
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/cmake/ros_cv_center_cConfig-version.cmake
+/home/jdedu/ros2_ws/src/install/ros_cv_center_c/share/ros_cv_center_c/package.xml

@@ -1,0 +1,36 @@
+running egg_info
+creating ../build/ros_dd/ros_dd.egg-info
+writing ../build/ros_dd/ros_dd.egg-info/PKG-INFO
+writing dependency_links to ../build/ros_dd/ros_dd.egg-info/dependency_links.txt
+writing requirements to ../build/ros_dd/ros_dd.egg-info/requires.txt
+writing top-level names to ../build/ros_dd/ros_dd.egg-info/top_level.txt
+writing manifest file '../build/ros_dd/ros_dd.egg-info/SOURCES.txt'
+reading manifest file '../build/ros_dd/ros_dd.egg-info/SOURCES.txt'
+writing manifest file '../build/ros_dd/ros_dd.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/jdedu/ros2_ws/src/build/ros_dd/build
+creating /home/jdedu/ros2_ws/src/build/ros_dd/build/lib
+creating /home/jdedu/ros2_ws/src/build/ros_dd/build/lib/ros_dd
+copying ros_dd/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_dd/build/lib/ros_dd
+running install
+running install_lib
+creating /home/jdedu/ros2_ws/src/install/ros_dd/lib/python3.12/site-packages/ros_dd
+copying /home/jdedu/ros2_ws/src/build/ros_dd/build/lib/ros_dd/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_dd/lib/python3.12/site-packages/ros_dd
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_dd/lib/python3.12/site-packages/ros_dd/__init__.py to __init__.cpython-312.pyc
+running install_data
+creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ament_index
+creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ament_index/resource_index
+creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ament_index/resource_index/packages
+copying resource/ros_dd -> /home/jdedu/ros2_ws/src/install/ros_dd/share/ament_index/resource_index/packages
+copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd
+creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/launch
+copying launch/rosdd_launch.py -> /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/launch
+creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/urdf
+copying urdf/ros_dd.urdf -> /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/urdf
+creating /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/rviz
+copying rviz/ros_dd.rviz -> /home/jdedu/ros2_ws/src/install/ros_dd/share/ros_dd/rviz
+running install_egg_info
+Copying ../build/ros_dd/ros_dd.egg-info to /home/jdedu/ros2_ws/src/install/ros_dd/lib/python3.12/site-packages/ros_dd-0.0.0-py3.12.egg-info
+running install_scripts
+writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_dd/install.log'

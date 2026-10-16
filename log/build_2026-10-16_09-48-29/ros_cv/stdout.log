@@ -1,0 +1,39 @@
+running egg_info
+creating ../build/ros_cv/ros_cv.egg-info
+writing ../build/ros_cv/ros_cv.egg-info/PKG-INFO
+writing dependency_links to ../build/ros_cv/ros_cv.egg-info/dependency_links.txt
+writing entry points to ../build/ros_cv/ros_cv.egg-info/entry_points.txt
+writing requirements to ../build/ros_cv/ros_cv.egg-info/requires.txt
+writing top-level names to ../build/ros_cv/ros_cv.egg-info/top_level.txt
+writing manifest file '../build/ros_cv/ros_cv.egg-info/SOURCES.txt'
+reading manifest file '../build/ros_cv/ros_cv.egg-info/SOURCES.txt'
+writing manifest file '../build/ros_cv/ros_cv.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/jdedu/ros2_ws/src/build/ros_cv/build
+creating /home/jdedu/ros2_ws/src/build/ros_cv/build/lib
+creating /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv
+copying ros_cv/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv
+copying ros_cv/cam_pub.py -> /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv
+copying ros_cv/cam_sub.py -> /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv
+running install
+running install_lib
+creating /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv
+copying /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv
+copying /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv/cam_pub.py -> /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv
+copying /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv/cam_sub.py -> /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv/__init__.py to __init__.cpython-312.pyc
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv/cam_pub.py to cam_pub.cpython-312.pyc
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv/cam_sub.py to cam_sub.cpython-312.pyc
+running install_data
+creating /home/jdedu/ros2_ws/src/install/ros_cv/share/ament_index
+creating /home/jdedu/ros2_ws/src/install/ros_cv/share/ament_index/resource_index
+creating /home/jdedu/ros2_ws/src/install/ros_cv/share/ament_index/resource_index/packages
+copying resource/ros_cv -> /home/jdedu/ros2_ws/src/install/ros_cv/share/ament_index/resource_index/packages
+copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_cv/share/ros_cv
+running install_egg_info
+Copying ../build/ros_cv/ros_cv.egg-info to /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv-0.0.0-py3.12.egg-info
+running install_scripts
+Installing cam_pub script to /home/jdedu/ros2_ws/src/install/ros_cv/lib/ros_cv
+Installing cam_sub script to /home/jdedu/ros2_ws/src/install/ros_cv/lib/ros_cv
+writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_cv/install.log'

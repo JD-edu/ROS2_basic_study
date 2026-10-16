@@ -1,0 +1,41 @@
+[2.147s] Invoking command in '/home/jdedu/ros2_ws/src/ros_cv': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jdedu/ros2_ws/src/build/ros_cv/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/ros_cv build --build-base /home/jdedu/ros2_ws/src/build/ros_cv/build install --record /home/jdedu/ros2_ws/src/build/ros_cv/install.log --install-scripts $base/lib/ros_cv --single-version-externally-managed install_data
+[2.403s] running egg_info
+[2.403s] creating ../build/ros_cv/ros_cv.egg-info
+[2.418s] writing ../build/ros_cv/ros_cv.egg-info/PKG-INFO
+[2.418s] writing dependency_links to ../build/ros_cv/ros_cv.egg-info/dependency_links.txt
+[2.418s] writing entry points to ../build/ros_cv/ros_cv.egg-info/entry_points.txt
+[2.421s] writing requirements to ../build/ros_cv/ros_cv.egg-info/requires.txt
+[2.421s] writing top-level names to ../build/ros_cv/ros_cv.egg-info/top_level.txt
+[2.421s] writing manifest file '../build/ros_cv/ros_cv.egg-info/SOURCES.txt'
+[2.452s] reading manifest file '../build/ros_cv/ros_cv.egg-info/SOURCES.txt'
+[2.454s] writing manifest file '../build/ros_cv/ros_cv.egg-info/SOURCES.txt'
+[2.454s] running build
+[2.454s] running build_py
+[2.454s] creating /home/jdedu/ros2_ws/src/build/ros_cv/build
+[2.454s] creating /home/jdedu/ros2_ws/src/build/ros_cv/build/lib
+[2.454s] creating /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv
+[2.454s] copying ros_cv/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv
+[2.454s] copying ros_cv/cam_pub.py -> /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv
+[2.454s] copying ros_cv/cam_sub.py -> /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv
+[2.454s] running install
+[2.460s] running install_lib
+[2.472s] creating /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv
+[2.473s] copying /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv
+[2.473s] copying /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv/cam_pub.py -> /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv
+[2.473s] copying /home/jdedu/ros2_ws/src/build/ros_cv/build/lib/ros_cv/cam_sub.py -> /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv
+[2.473s] byte-compiling /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv/__init__.py to __init__.cpython-312.pyc
+[2.473s] byte-compiling /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv/cam_pub.py to cam_pub.cpython-312.pyc
+[2.474s] byte-compiling /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv/cam_sub.py to cam_sub.cpython-312.pyc
+[2.474s] running install_data
+[2.475s] creating /home/jdedu/ros2_ws/src/install/ros_cv/share/ament_index
+[2.475s] creating /home/jdedu/ros2_ws/src/install/ros_cv/share/ament_index/resource_index
+[2.475s] creating /home/jdedu/ros2_ws/src/install/ros_cv/share/ament_index/resource_index/packages
+[2.475s] copying resource/ros_cv -> /home/jdedu/ros2_ws/src/install/ros_cv/share/ament_index/resource_index/packages
+[2.475s] copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_cv/share/ros_cv
+[2.475s] running install_egg_info
+[2.494s] Copying ../build/ros_cv/ros_cv.egg-info to /home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages/ros_cv-0.0.0-py3.12.egg-info
+[2.498s] running install_scripts
+[2.637s] Installing cam_pub script to /home/jdedu/ros2_ws/src/install/ros_cv/lib/ros_cv
+[2.639s] Installing cam_sub script to /home/jdedu/ros2_ws/src/install/ros_cv/lib/ros_cv
+[2.639s] writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_cv/install.log'
+[2.717s] Invoked command in '/home/jdedu/ros2_ws/src/ros_cv' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jdedu/ros2_ws/src/build/ros_cv/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jdedu/ros2_ws/src/install/ros_cv/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/ros_cv build --build-base /home/jdedu/ros2_ws/src/build/ros_cv/build install --record /home/jdedu/ros2_ws/src/build/ros_cv/install.log --install-scripts $base/lib/ros_cv --single-version-externally-managed install_data

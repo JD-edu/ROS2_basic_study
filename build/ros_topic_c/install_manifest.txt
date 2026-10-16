@@ -1,0 +1,17 @@
+/home/jdedu/ros2_ws/src/install/ros_topic_c/lib/ros_topic_c/talker
+/home/jdedu/ros2_ws/src/install/ros_topic_c/lib/ros_topic_c/listener
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ament_index/resource_index/package_run_dependencies/ros_topic_c
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ament_index/resource_index/parent_prefix_path/ros_topic_c
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/environment/ament_prefix_path.sh
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/environment/ament_prefix_path.dsv
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/environment/path.sh
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/environment/path.dsv
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/local_setup.bash
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/local_setup.sh
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/local_setup.zsh
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/local_setup.dsv
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/package.dsv
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ament_index/resource_index/packages/ros_topic_c
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/cmake/ros_topic_cConfig.cmake
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/cmake/ros_topic_cConfig-version.cmake
+/home/jdedu/ros2_ws/src/install/ros_topic_c/share/ros_topic_c/package.xml

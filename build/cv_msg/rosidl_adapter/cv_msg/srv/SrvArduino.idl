@@ -1,0 +1,17 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from cv_msg/srv/SrvArduino.srv
+// generated code does not contain a copyright notice
+
+
+module cv_msg {
+  module srv {
+    struct SrvArduino_Request {
+      int64 dir;
+
+      int64 speed;
+    };
+    struct SrvArduino_Response {
+      int64 answer;
+    };
+  };
+};

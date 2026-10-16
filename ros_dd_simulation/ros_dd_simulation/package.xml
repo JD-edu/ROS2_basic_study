@@ -12,11 +12,12 @@
   <exec_depend>ros_dd_gazebo</exec_depend>
   <exec_depend>ros_dd_navigation</exec_depend>
   <exec_depend>ros_dd_teleop</exec_depend>
+  <exec_depend>ros_dd_nav2</exec_depend>
   
-  <member_of_group>rosidl_interface_packages</member_of_group>
+
   
   <export>
     <build_type>ament_cmake</build_type>
-    <metapackage/>
+
   </export>
 </package>

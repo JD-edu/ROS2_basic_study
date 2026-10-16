@@ -1,0 +1,35 @@
+running egg_info
+creating ../build/ros_teleop_rx/ros_teleop_rx.egg-info
+writing ../build/ros_teleop_rx/ros_teleop_rx.egg-info/PKG-INFO
+writing dependency_links to ../build/ros_teleop_rx/ros_teleop_rx.egg-info/dependency_links.txt
+writing entry points to ../build/ros_teleop_rx/ros_teleop_rx.egg-info/entry_points.txt
+writing requirements to ../build/ros_teleop_rx/ros_teleop_rx.egg-info/requires.txt
+writing top-level names to ../build/ros_teleop_rx/ros_teleop_rx.egg-info/top_level.txt
+writing manifest file '../build/ros_teleop_rx/ros_teleop_rx.egg-info/SOURCES.txt'
+reading manifest file '../build/ros_teleop_rx/ros_teleop_rx.egg-info/SOURCES.txt'
+writing manifest file '../build/ros_teleop_rx/ros_teleop_rx.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/jdedu/ros2_ws/src/build/ros_teleop_rx/build
+creating /home/jdedu/ros2_ws/src/build/ros_teleop_rx/build/lib
+creating /home/jdedu/ros2_ws/src/build/ros_teleop_rx/build/lib/ros_teleop_rx
+copying ros_teleop_rx/led_control.py -> /home/jdedu/ros2_ws/src/build/ros_teleop_rx/build/lib/ros_teleop_rx
+copying ros_teleop_rx/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_teleop_rx/build/lib/ros_teleop_rx
+running install
+running install_lib
+creating /home/jdedu/ros2_ws/src/install/ros_teleop_rx/lib/python3.12/site-packages/ros_teleop_rx
+copying /home/jdedu/ros2_ws/src/build/ros_teleop_rx/build/lib/ros_teleop_rx/led_control.py -> /home/jdedu/ros2_ws/src/install/ros_teleop_rx/lib/python3.12/site-packages/ros_teleop_rx
+copying /home/jdedu/ros2_ws/src/build/ros_teleop_rx/build/lib/ros_teleop_rx/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_teleop_rx/lib/python3.12/site-packages/ros_teleop_rx
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_teleop_rx/lib/python3.12/site-packages/ros_teleop_rx/led_control.py to led_control.cpython-312.pyc
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_teleop_rx/lib/python3.12/site-packages/ros_teleop_rx/__init__.py to __init__.cpython-312.pyc
+running install_data
+creating /home/jdedu/ros2_ws/src/install/ros_teleop_rx/share/ament_index
+creating /home/jdedu/ros2_ws/src/install/ros_teleop_rx/share/ament_index/resource_index
+creating /home/jdedu/ros2_ws/src/install/ros_teleop_rx/share/ament_index/resource_index/packages
+copying resource/ros_teleop_rx -> /home/jdedu/ros2_ws/src/install/ros_teleop_rx/share/ament_index/resource_index/packages
+copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_teleop_rx/share/ros_teleop_rx
+running install_egg_info
+Copying ../build/ros_teleop_rx/ros_teleop_rx.egg-info to /home/jdedu/ros2_ws/src/install/ros_teleop_rx/lib/python3.12/site-packages/ros_teleop_rx-0.0.0-py3.12.egg-info
+running install_scripts
+Installing led_control script to /home/jdedu/ros2_ws/src/install/ros_teleop_rx/lib/ros_teleop_rx
+writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_teleop_rx/install.log'

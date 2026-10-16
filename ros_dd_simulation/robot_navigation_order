@@ -1,13 +1,10 @@
-1. Run following launch command. It will run gazebo simulator and load robot into gazebo. 
+ROS 2 Jazzy / Gazebo Harmonic — see README.md for installation.
 
-ros2 launch ros_dd_gazebo ros_dd_xacro.launch.py 
+1. ros2 launch ros_dd_gazebo ros_dd_xacro.launch.py
+2. For a saved map (Cartographer stopped):
+   ros2 launch ros_dd_navigation navigation.launch.py map:=$HOME/map.yaml
+3. Set initial pose in RViz, then send a navigation goal.
 
-2. Run following launch command. It will run catrographer and rviz for finding robot location.
-
-ros2 launch ros_dd_cartographer ros_dd_cartograph.launch.py 
-
-3. Run following launch command. It will run rviz that let you move robot in gazebo simulator. 
-
-ros2 launch ros_dd_navigation navigation.launch.py map:=/home/jd/map.yaml
-
-The map you generate should be in /home/jd/ folder. 
+For online SLAM, start Cartographer, then disable AMCL / map_server:
+ros2 launch ros_dd_cartographer ros_dd_cartograph.launch.py
+ros2 launch ros_dd_navigation navigation.launch.py use_localization:=false

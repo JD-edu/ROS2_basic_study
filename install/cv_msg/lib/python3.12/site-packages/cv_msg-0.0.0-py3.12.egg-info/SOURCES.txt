@@ -1,0 +1,6 @@
+setup.py
+cv_msg/__init__.py
+cv_msg.egg-info/PKG-INFO
+cv_msg.egg-info/SOURCES.txt
+cv_msg.egg-info/dependency_links.txt
+cv_msg.egg-info/top_level.txt

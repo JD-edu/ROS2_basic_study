@@ -1,0 +1,39 @@
+running egg_info
+creating ../build/ros_serial/ros_serial.egg-info
+writing ../build/ros_serial/ros_serial.egg-info/PKG-INFO
+writing dependency_links to ../build/ros_serial/ros_serial.egg-info/dependency_links.txt
+writing entry points to ../build/ros_serial/ros_serial.egg-info/entry_points.txt
+writing requirements to ../build/ros_serial/ros_serial.egg-info/requires.txt
+writing top-level names to ../build/ros_serial/ros_serial.egg-info/top_level.txt
+writing manifest file '../build/ros_serial/ros_serial.egg-info/SOURCES.txt'
+reading manifest file '../build/ros_serial/ros_serial.egg-info/SOURCES.txt'
+writing manifest file '../build/ros_serial/ros_serial.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/jdedu/ros2_ws/src/build/ros_serial/build
+creating /home/jdedu/ros2_ws/src/build/ros_serial/build/lib
+creating /home/jdedu/ros2_ws/src/build/ros_serial/build/lib/ros_serial
+copying ros_serial/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_serial/build/lib/ros_serial
+copying ros_serial/serial_pub.py -> /home/jdedu/ros2_ws/src/build/ros_serial/build/lib/ros_serial
+copying ros_serial/serial_sub.py -> /home/jdedu/ros2_ws/src/build/ros_serial/build/lib/ros_serial
+running install
+running install_lib
+creating /home/jdedu/ros2_ws/src/install/ros_serial/lib/python3.12/site-packages/ros_serial
+copying /home/jdedu/ros2_ws/src/build/ros_serial/build/lib/ros_serial/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_serial/lib/python3.12/site-packages/ros_serial
+copying /home/jdedu/ros2_ws/src/build/ros_serial/build/lib/ros_serial/serial_pub.py -> /home/jdedu/ros2_ws/src/install/ros_serial/lib/python3.12/site-packages/ros_serial
+copying /home/jdedu/ros2_ws/src/build/ros_serial/build/lib/ros_serial/serial_sub.py -> /home/jdedu/ros2_ws/src/install/ros_serial/lib/python3.12/site-packages/ros_serial
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_serial/lib/python3.12/site-packages/ros_serial/__init__.py to __init__.cpython-312.pyc
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_serial/lib/python3.12/site-packages/ros_serial/serial_pub.py to serial_pub.cpython-312.pyc
+byte-compiling /home/jdedu/ros2_ws/src/install/ros_serial/lib/python3.12/site-packages/ros_serial/serial_sub.py to serial_sub.cpython-312.pyc
+running install_data
+creating /home/jdedu/ros2_ws/src/install/ros_serial/share/ament_index
+creating /home/jdedu/ros2_ws/src/install/ros_serial/share/ament_index/resource_index
+creating /home/jdedu/ros2_ws/src/install/ros_serial/share/ament_index/resource_index/packages
+copying resource/ros_serial -> /home/jdedu/ros2_ws/src/install/ros_serial/share/ament_index/resource_index/packages
+copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_serial/share/ros_serial
+running install_egg_info
+Copying ../build/ros_serial/ros_serial.egg-info to /home/jdedu/ros2_ws/src/install/ros_serial/lib/python3.12/site-packages/ros_serial-0.0.0-py3.12.egg-info
+running install_scripts
+Installing serial_pub script to /home/jdedu/ros2_ws/src/install/ros_serial/lib/ros_serial
+Installing serial_sub script to /home/jdedu/ros2_ws/src/install/ros_serial/lib/ros_serial
+writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_serial/install.log'

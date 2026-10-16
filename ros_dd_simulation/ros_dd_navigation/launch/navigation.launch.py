@@ -1,63 +1,104 @@
+"""Jazzy navigation with optional AMCL localization on a saved map."""
 import os
+from pathlib import Path
+
+import yaml
+
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, GroupAction
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch.actions import DeclareLaunchArgument, OpaqueFunction
+from launch.conditions import IfCondition
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.descriptions import ParameterFile
+from nav2_common.launch import RewrittenYaml
+
+
+def _validate_map(context):
+    """Reject a missing map or image before starting localization nodes."""
+    path = Path(LaunchConfiguration('map').perform(context)).expanduser()
+    if not path.is_file():
+        raise RuntimeError(f'Map YAML file does not exist: {path}')
+    with path.open(encoding='utf-8') as stream:
+        config = yaml.safe_load(stream)
+    if not isinstance(config, dict) or not config.get('image'):
+        raise RuntimeError(f'Map YAML has no image entry: {path}')
+    image = Path(config['image']).expanduser()
+    if not image.is_absolute():
+        image = path.parent / image
+    if not image.is_file():
+        raise RuntimeError(f'Map image does not exist: {image}')
+    return []
+
+
+def _launch_rviz(context):
+    """Allow a graphics-driver workaround limited to the RViz process."""
+    software = LaunchConfiguration('rviz_software_rendering').perform(context).lower()
+    env = {'LIBGL_ALWAYS_SOFTWARE': '1'} if software in ('true', '1') else {}
+    return [Node(
+        package='rviz2', executable='rviz2',
+        arguments=['-d', LaunchConfiguration('rviz_config').perform(context)],
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+        additional_env=env, output='screen')]
+
 
 def generate_launch_description():
-    pkg_name = 'ros_dd_navigation'
-    nav2_bringup_dir = get_package_share_directory('nav2_bringup')
-    pkg_share_dir = get_package_share_directory(pkg_name)
-
-    # 1. Launch Arguments 선언
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-    map_yaml_file = LaunchConfiguration('map', default=os.path.join(pkg_share_dir, 'map.yaml'))
-    params_file = LaunchConfiguration('params_file', default=os.path.join(pkg_share_dir, 'config', 'nav2_params.yaml'))
-    
-    # 2. Nav2 Bringup 실행
-    # Nav2의 핵심 노드(AMCL, Planner, Controller, BT Navigator 등)를 실행합니다.
-    nav2_bringup = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(nav2_bringup_dir, 'launch', 'bringup_launch.py')
-        ),
-        launch_arguments={
-            'map': map_yaml_file,
-            'use_sim_time': use_sim_time,
-            'params_file': params_file,
-            'autostart': 'true',
-            'namespace': '', # 네임스페이스 없이 실행
-        }.items(),
-    )
-    
-    # 3. Rviz2 실행 (Nav2 설정을 로드)
-    # Nav2는 자체 Rviz 설정을 사용하므로 nav2_bringup에서 제공하는 파일을 사용합니다.
-    rviz_config_dir = os.path.join(nav2_bringup_dir, 'rviz', 'nav2_default_view.rviz')
-    
-    rviz_node = Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        arguments=['-d', rviz_config_dir],
-        parameters=[{'use_sim_time': use_sim_time}],
-        output='screen'
-    )
-
-    return LaunchDescription([
-        DeclareLaunchArgument(
-            'use_sim_time',
-            default_value='true',
-            description='Use simulation (Gazebo) clock if true'),
-        DeclareLaunchArgument(
-            'map',
-            default_value=map_yaml_file,
-            description='Full path to map file to load'),
-        DeclareLaunchArgument(
-            'params_file',
-            default_value=params_file,
-            description='Full path to param file to load'),
-
-        nav2_bringup,
-        rviz_node,
+    share = get_package_share_directory('ros_dd_navigation')
+    use_sim_time = LaunchConfiguration('use_sim_time')
+    autostart = LaunchConfiguration('autostart')
+    params = ParameterFile(RewrittenYaml(
+        source_file=LaunchConfiguration('params_file'),
+        param_rewrites={'use_sim_time': use_sim_time}, convert_types=True))
+    servers = [
+        ('nav2_controller', 'controller_server'),
+        ('nav2_smoother', 'smoother_server'),
+        ('nav2_planner', 'planner_server'),
+        ('nav2_behaviors', 'behavior_server'),
+        ('nav2_bt_navigator', 'bt_navigator'),
+        ('nav2_waypoint_follower', 'waypoint_follower'),
+        ('nav2_velocity_smoother', 'velocity_smoother'),
+    ]
+    actions = [
+        DeclareLaunchArgument('use_sim_time', default_value='true'),
+        DeclareLaunchArgument('autostart', default_value='true'),
+        DeclareLaunchArgument('use_rviz', default_value='true'),
+        DeclareLaunchArgument('rviz_config', default_value=os.path.join(share, 'rviz', 'navigation.rviz')),
+        DeclareLaunchArgument('rviz_software_rendering', default_value='false',
+                              description='Use CPU rendering for RViz graphics driver issues'),
+        DeclareLaunchArgument('use_localization', default_value='true',
+                              description='Disable when Cartographer provides map and map->odom'),
+        DeclareLaunchArgument('map', default_value=os.path.join(share, 'maps', 'map.yaml')),
+        DeclareLaunchArgument('params_file', default_value=os.path.join(share, 'config', 'nav2_params.yaml')),
+        OpaqueFunction(function=_validate_map,
+                       condition=IfCondition(LaunchConfiguration('use_localization'))),
+        Node(package='nav2_map_server', executable='map_server', name='map_server',
+             condition=IfCondition(LaunchConfiguration('use_localization')),
+             parameters=[params, {'yaml_filename': LaunchConfiguration('map')}],
+             remappings=[('/tf', 'tf'), ('/tf_static', 'tf_static')], output='screen'),
+        Node(package='nav2_amcl', executable='amcl', name='amcl',
+             condition=IfCondition(LaunchConfiguration('use_localization')),
+             parameters=[params],
+             remappings=[('/tf', 'tf'), ('/tf_static', 'tf_static')], output='screen'),
+        Node(package='nav2_lifecycle_manager', executable='lifecycle_manager',
+             name='lifecycle_manager_localization',
+             condition=IfCondition(LaunchConfiguration('use_localization')),
+             parameters=[{'use_sim_time': use_sim_time, 'autostart': autostart,
+                          'node_names': ['map_server', 'amcl']}], output='screen'),
+    ]
+    for package, executable in servers:
+        remaps = [('/tf', 'tf'), ('/tf_static', 'tf_static')]
+        if executable in ('controller_server', 'behavior_server'):
+            remaps.append(('cmd_vel', 'cmd_vel_nav'))
+        elif executable == 'velocity_smoother':
+            remaps.extend([('cmd_vel', 'cmd_vel_nav'), ('cmd_vel_smoothed', 'cmd_vel')])
+        actions.append(Node(package=package, executable=executable, name=executable,
+                            parameters=[params], remappings=remaps, output='screen'))
+    actions.extend([
+        Node(package='nav2_lifecycle_manager', executable='lifecycle_manager',
+             name='lifecycle_manager_navigation', output='screen',
+             parameters=[{'use_sim_time': use_sim_time, 'autostart': autostart,
+                          'node_names': [name for _, name in servers]}]),
+        OpaqueFunction(function=_launch_rviz,
+                       condition=IfCondition(LaunchConfiguration('use_rviz'))),
     ])
+    return LaunchDescription(actions)

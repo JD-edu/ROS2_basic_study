@@ -1,0 +1,3 @@
+[console_scripts]
+motor_srv_client = ros_motor_srv.motor_srv_client:main
+motor_srv_server = ros_motor_srv.motor_srv_server:main

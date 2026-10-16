@@ -1,0 +1,17 @@
+package.xml
+setup.cfg
+setup.py
+../build/ros_cv/ros_cv.egg-info/PKG-INFO
+../build/ros_cv/ros_cv.egg-info/SOURCES.txt
+../build/ros_cv/ros_cv.egg-info/dependency_links.txt
+../build/ros_cv/ros_cv.egg-info/entry_points.txt
+../build/ros_cv/ros_cv.egg-info/requires.txt
+../build/ros_cv/ros_cv.egg-info/top_level.txt
+../build/ros_cv/ros_cv.egg-info/zip-safe
+resource/ros_cv
+ros_cv/__init__.py
+ros_cv/cam_pub.py
+ros_cv/cam_sub.py
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

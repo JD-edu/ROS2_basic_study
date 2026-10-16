@@ -1,0 +1,37 @@
+[2.199s] Invoking command in '/home/jdedu/ros2_ws/src/ros_dd_simulation/ros_dd_teleop': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jdedu/ros2_ws/src/build/ros_dd_teleop/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ros_dd_teleop build --build-base /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build install --record /home/jdedu/ros2_ws/src/build/ros_dd_teleop/install.log --install-scripts $base/lib/ros_dd_teleop --single-version-externally-managed install_data
+[2.472s] running egg_info
+[2.473s] creating ../../build/ros_dd_teleop/ros_dd_teleop.egg-info
+[2.491s] writing ../../build/ros_dd_teleop/ros_dd_teleop.egg-info/PKG-INFO
+[2.491s] writing dependency_links to ../../build/ros_dd_teleop/ros_dd_teleop.egg-info/dependency_links.txt
+[2.491s] writing entry points to ../../build/ros_dd_teleop/ros_dd_teleop.egg-info/entry_points.txt
+[2.491s] writing requirements to ../../build/ros_dd_teleop/ros_dd_teleop.egg-info/requires.txt
+[2.491s] writing top-level names to ../../build/ros_dd_teleop/ros_dd_teleop.egg-info/top_level.txt
+[2.491s] writing manifest file '../../build/ros_dd_teleop/ros_dd_teleop.egg-info/SOURCES.txt'
+[2.531s] reading manifest file '../../build/ros_dd_teleop/ros_dd_teleop.egg-info/SOURCES.txt'
+[2.532s] writing manifest file '../../build/ros_dd_teleop/ros_dd_teleop.egg-info/SOURCES.txt'
+[2.532s] running build
+[2.532s] running build_py
+[2.532s] creating /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build
+[2.532s] creating /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib
+[2.532s] creating /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib/ros_dd_teleop
+[2.533s] copying ros_dd_teleop/__init__.py -> /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib/ros_dd_teleop
+[2.533s] copying ros_dd_teleop/ros_dd_teleop.py -> /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib/ros_dd_teleop
+[2.533s] running install
+[2.541s] running install_lib
+[2.557s] creating /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop
+[2.559s] copying /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib/ros_dd_teleop/__init__.py -> /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop
+[2.559s] copying /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build/lib/ros_dd_teleop/ros_dd_teleop.py -> /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop
+[2.559s] byte-compiling /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop/__init__.py to __init__.cpython-312.pyc
+[2.559s] byte-compiling /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop/ros_dd_teleop.py to ros_dd_teleop.cpython-312.pyc
+[2.560s] running install_data
+[2.560s] creating /home/jdedu/ros2_ws/src/install/ros_dd_teleop/share/ament_index
+[2.560s] creating /home/jdedu/ros2_ws/src/install/ros_dd_teleop/share/ament_index/resource_index
+[2.560s] creating /home/jdedu/ros2_ws/src/install/ros_dd_teleop/share/ament_index/resource_index/packages
+[2.560s] copying resource/ros_dd_teleop -> /home/jdedu/ros2_ws/src/install/ros_dd_teleop/share/ament_index/resource_index/packages
+[2.560s] copying package.xml -> /home/jdedu/ros2_ws/src/install/ros_dd_teleop/share/ros_dd_teleop
+[2.560s] running install_egg_info
+[2.580s] Copying ../../build/ros_dd_teleop/ros_dd_teleop.egg-info to /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages/ros_dd_teleop-0.0.0-py3.12.egg-info
+[2.581s] running install_scripts
+[2.726s] Installing asdw_teleop script to /home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/ros_dd_teleop
+[2.726s] writing list of installed files to '/home/jdedu/ros2_ws/src/build/ros_dd_teleop/install.log'
+[2.984s] Invoked command in '/home/jdedu/ros2_ws/src/ros_dd_simulation/ros_dd_teleop' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jdedu/ros2_ws/src/build/ros_dd_teleop/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jdedu/ros2_ws/src/install/ros_dd_teleop/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ros_dd_teleop build --build-base /home/jdedu/ros2_ws/src/build/ros_dd_teleop/build install --record /home/jdedu/ros2_ws/src/build/ros_dd_teleop/install.log --install-scripts $base/lib/ros_dd_teleop --single-version-externally-managed install_data

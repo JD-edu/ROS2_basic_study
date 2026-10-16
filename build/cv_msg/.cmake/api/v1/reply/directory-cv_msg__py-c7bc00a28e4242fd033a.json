@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "cv_msg__py",
+		"source" : "/home/jdedu/ros2_ws/src/build/cv_msg/cv_msg__py"
+	}
+}
