@@ -1,2 +1,0 @@
-[console_scripts]
-led_control = ros_teleop_rx.led_control:main

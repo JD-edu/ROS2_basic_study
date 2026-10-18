@@ -1,6 +1,0 @@
-source;share/ros_teleop_rx/hook/pythonpath.ps1
-source;share/ros_teleop_rx/hook/pythonpath.dsv
-source;share/ros_teleop_rx/hook/pythonpath.sh
-source;share/ros_teleop_rx/hook/ament_prefix_path.ps1
-source;share/ros_teleop_rx/hook/ament_prefix_path.dsv
-source;share/ros_teleop_rx/hook/ament_prefix_path.sh

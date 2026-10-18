@@ -1,8 +1,0 @@
-source;share/ros_cv_center_c/hook/cmake_prefix_path.ps1
-source;share/ros_cv_center_c/hook/cmake_prefix_path.dsv
-source;share/ros_cv_center_c/hook/cmake_prefix_path.sh
-source;share/ros_cv_center_c/local_setup.bash
-source;share/ros_cv_center_c/local_setup.dsv
-source;share/ros_cv_center_c/local_setup.ps1
-source;share/ros_cv_center_c/local_setup.sh
-source;share/ros_cv_center_c/local_setup.zsh

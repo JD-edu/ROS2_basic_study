@@ -1,3 +1,0 @@
-[console_scripts]
-serial_pub = ros_serial.serial_pub:main
-serial_sub = ros_serial.serial_sub:main

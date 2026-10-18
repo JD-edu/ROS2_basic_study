@@ -129,59 +129,11 @@ are expected. Map loading success does not imply localization is initialized.
 `rviz_software_rendering:=true` flag affects RViz only. It was tested and did not
 eliminate this machine's sampler shader diagnostic; it is not a confirmed fix.
 
-## Three-table world (Harmonic)
+## Three-table world: mapping and saved-map navigation
 
-The original ZIP's table dimensions, positions and 8 x 8 m boundary are retained:
-
-| Model | Center x, y (m) | Size (m) |
-|---|---|---|
-| table_1 | 2, 1.5 | 1.2 x 0.8 x 0.75 |
-| table_2 | 2, -1.5 | 1.2 x 0.8 x 0.75 |
-| table_3 | -2, 1.5 | 1.2 x 0.8 x 0.75 |
-
-Stop any previous Gazebo, Cartographer and navigation launches first. The following
-single command starts the new world, robot at world (0, 0), Cartographer, Nav2 and
-RViz. Do not also start the three individual launches alongside it.
-
-```bash
-source /opt/ros/jazzy/setup.bash
-source ~/ros2_ws/install/setup.bash
-ros2 launch ros_dd_navigation three_tables_navigation.launch.py
-```
-
-Cartographer is the only map and map->odom provider: AMCL and map_server are not
-started. Use **2D Goal Pose** after the map appears, or use the terminal client:
-
-```bash
-ros2 run ros_dd_nav2 goto_pose --ros-args -p use_sim_time:=true
-# Then enter x y, for example:
-# 0.6 -0.5
-```
-
-This is online SLAM navigation; it does not load the old hexagonal-world map.
-The external `slam_harness.velocity_gate` from the ZIP is not required: Nav2's
-velocity smoother feeds /cmd_vel directly. No external harness directory is used.
-
-Options: `gui:=false` disables Gazebo GUI; `use_rviz:=false` disables RViz.
-`params_file:=/absolute/path/to/params.yaml` overrides the table-world Nav2 tuning.
-For simulation only, without Cartographer or Nav2:
-
-```bash
-ros2 launch ros_dd_gazebo three_tables.launch.py
-```
-
-For separate terminals (instead of the integrated launch):
-
-```bash
-# Terminal 1
-ros2 launch ros_dd_gazebo three_tables.launch.py
-# Terminal 2
-ros2 launch ros_dd_cartographer ros_dd_cartograph.launch.py configuration_basename:=three_tables.lua use_rviz:=false
-# Terminal 3
-ros2 launch ros_dd_navigation navigation.launch.py use_localization:=false params_file:=$(ros2 pkg prefix --share ros_dd_navigation)/config/three_tables_nav2.yaml
-```
-
-Validation: the integrated server-only launch received map, laser scan, odometry
-and map->base_link TF; all seven Nav2 servers became active. A NavigateToPose goal
-at map (0.6, -0.5), yaw 0, completed successfully. One map publisher was verified,
-with neither AMCL nor map_server running.
+The workflow is now separated. `three_tables_mapping.launch.py` starts Gazebo +
+Cartographer without Nav2. Save the map and stop mapping, then run
+`three_tables_navigation.launch.py map:=/absolute/path/to/map.yaml`, which starts
+Gazebo + map_server + AMCL + Nav2 without Cartographer. The `map` argument is required.
+See [THREE_TABLES.md](THREE_TABLES.md) for commands and localization steps.
+Harness and LLM code are unchanged and neither is started by these launches.

@@ -1,2 +1,0 @@
-[console_scripts]
-asdw_teleop = ros_dd_teleop.ros_dd_teleop:main

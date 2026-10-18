@@ -1,4 +1,0 @@
-source;share/ros_teleop_rx_c/local_setup.bash
-source;share/ros_teleop_rx_c/local_setup.dsv
-source;share/ros_teleop_rx_c/local_setup.sh
-source;share/ros_teleop_rx_c/local_setup.zsh

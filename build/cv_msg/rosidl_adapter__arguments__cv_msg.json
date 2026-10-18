@@ -1,8 +1,0 @@
-{
-  "package_name": "cv_msg",
-  "non_idl_tuples": [
-    "/home/jdedu/ros2_ws/src/cv_msg:msg/MsgCenter.msg",
-    "/home/jdedu/ros2_ws/src/cv_msg:srv/SrvAddint.srv",
-    "/home/jdedu/ros2_ws/src/cv_msg:srv/SrvArduino.srv"
-  ]
-}

@@ -1,6 +1,0 @@
-msg/MsgCenter.idl
-msg/MsgCenter.msg
-srv/SrvAddint.idl
-srv/SrvAddint.srv
-srv/SrvArduino.idl
-srv/SrvArduino.srv

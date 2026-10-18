@@ -1,3 +1,0 @@
-[console_scripts]
-cam_center_pub = ros_cv_center.cam_center_pub:main
-cam_center_sub = ros_cv_center.cam_center_sub:main

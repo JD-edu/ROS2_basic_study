@@ -33,6 +33,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'start_navigation_when_localized = ros_dd_navigation.navigation_startup:main',
         ],
     },
 )

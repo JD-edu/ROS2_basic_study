@@ -1,9 +1,0 @@
-/home/jdedu/ros2_ws/src/build/ros_dd_c/CMakeFiles/uninstall.dir
-/home/jdedu/ros2_ws/src/build/ros_dd_c/CMakeFiles/ros_dd_c_uninstall.dir
-/home/jdedu/ros2_ws/src/build/ros_dd_c/CMakeFiles/test.dir
-/home/jdedu/ros2_ws/src/build/ros_dd_c/CMakeFiles/edit_cache.dir
-/home/jdedu/ros2_ws/src/build/ros_dd_c/CMakeFiles/rebuild_cache.dir
-/home/jdedu/ros2_ws/src/build/ros_dd_c/CMakeFiles/list_install_components.dir
-/home/jdedu/ros2_ws/src/build/ros_dd_c/CMakeFiles/install.dir
-/home/jdedu/ros2_ws/src/build/ros_dd_c/CMakeFiles/install/local.dir
-/home/jdedu/ros2_ws/src/build/ros_dd_c/CMakeFiles/install/strip.dir

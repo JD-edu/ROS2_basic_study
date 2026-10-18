@@ -8,9 +8,10 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
 from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import Node
 from launch_ros.descriptions import ParameterFile
+from launch_ros.parameter_descriptions import ParameterValue
 from nav2_common.launch import RewrittenYaml
 
 
@@ -46,6 +47,13 @@ def generate_launch_description():
     share = get_package_share_directory('ros_dd_navigation')
     use_sim_time = LaunchConfiguration('use_sim_time')
     autostart = LaunchConfiguration('autostart')
+    use_localization = LaunchConfiguration('use_localization')
+    delayed_start = PythonExpression([
+        "'", use_localization, "'.lower() in ('true', '1') and '",
+        autostart, "'.lower() in ('true', '1')"])
+    immediate_start = PythonExpression([
+        "'", use_localization, "'.lower() not in ('true', '1') and '",
+        autostart, "'.lower() in ('true', '1')"])
     params = ParameterFile(RewrittenYaml(
         source_file=LaunchConfiguration('params_file'),
         param_rewrites={'use_sim_time': use_sim_time}, convert_types=True))
@@ -96,8 +104,12 @@ def generate_launch_description():
     actions.extend([
         Node(package='nav2_lifecycle_manager', executable='lifecycle_manager',
              name='lifecycle_manager_navigation', output='screen',
-             parameters=[{'use_sim_time': use_sim_time, 'autostart': autostart,
+             parameters=[{'use_sim_time': use_sim_time,
+                          'autostart': ParameterValue(immediate_start, value_type=bool),
                           'node_names': [name for _, name in servers]}]),
+        Node(package='ros_dd_navigation', executable='start_navigation_when_localized',
+             name='navigation_startup', condition=IfCondition(delayed_start),
+             parameters=[{'use_sim_time': use_sim_time}], output='screen'),
         OpaqueFunction(function=_launch_rviz,
                        condition=IfCondition(LaunchConfiguration('use_rviz'))),
     ])
