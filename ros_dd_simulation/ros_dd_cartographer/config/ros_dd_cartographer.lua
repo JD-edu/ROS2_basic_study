@@ -10,7 +10,7 @@ options = {
   map_frame = "map",
   
   -- 🌟 1. 로봇의 Lidar 프레임으로 변경 (필수) 🌟
-  tracking_frame = "laser_link", 
+  tracking_frame = "base_footprint", 
   
   -- Cartographer가 발행할 TF 프레임 (map -> published_frame)
   published_frame = "odom", 
