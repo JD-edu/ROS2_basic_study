@@ -286,3 +286,111 @@ AMCL, Nav2를 실행합니다. 자세한 절차는 [THREE_TABLES.md](THREE_TABLE
 저장 지도 기반 AMCL 초기 위치 자동 입력을 확인했습니다.
 사용자가 RViz에서 초기 위치 적용과 정상 동작을 확인했습니다.
 이 기록은 모든 월드·출발 위치의 좌표 일치나 전체 경로 주행 성능을 보장하지 않습니다.
+
+## 원점 설정에 중요한 파라미터
+
+### 좌표계와 TF 관계
+
+이 프로젝트의 위치 추정은 다음 TF 연결을 사용합니다.
+
+```text
+map -> odom -> base_footprint -> base_link -> laser_link
+```
+
+- `map`: 저장 지도에서의 위치를 표현하는 기준입니다.
+- `odom`: 바퀴 오도메트리 기준입니다. 이동은 연속적이지만 누적 오차가 생길 수 있습니다.
+- `base_footprint`: 로봇의 바닥 기준 프레임입니다. 이번 원점 정렬 절차의 로봇 기준입니다.
+- `base_link`, `laser_link`: 로봇 본체와 LiDAR 장착 프레임입니다. URDF가 상대 위치를 정의합니다.
+
+`map -> odom`은 지도 생성 중에는 Cartographer가, 저장 지도 주행 중에는 AMCL이
+발행합니다. 두 노드가 동시에 같은 TF를 발행하지 않도록 실행 모드를 구분합니다.
+Gazebo `world`는 이 TF 연결에 자동으로 포함되는 프레임이 아닙니다.
+`world`와 `map`의 이름을 같게 바꾸거나 정적 TF를 추가하는 것만으로
+지도와 실제 위치의 오차가 보정되지는 않습니다.
+
+### Gazebo: 로봇 생성 위치
+
+설정 위치는 `ros_dd_gazebo/launch/ros_dd.launch.py`의 실행 인자입니다.
+
+| 인자 | 이 절차의 값 | 의미 및 주의점 |
+| --- | --- | --- |
+| `x` | `0.0` | Gazebo world 기준 생성 X 위치(m) |
+| `y` | `0.0` | Gazebo world 기준 생성 Y 위치(m). 생략 시 기본값은 `0.5` |
+| `z` | `0.05` | 생성 높이(m). AMCL의 지도상 초기 Z와 같게 만들 필요는 없음 |
+| `yaw` | `0.0` | world 기준 생성 방향(rad). 0이면 로봇 정면이 world의 +X 방향 |
+| `world` | 기본 `ros_dd.world` | 사용할 월드 파일. 지도 생성과 Navigation에서 같은 환경 사용 |
+| `world_name` | `default` | 월드 내부 이름. 생성 대상 월드 이름과 일치해야 함 |
+| `use_sim_time` | `true` | ROS 노드가 Gazebo의 `/clock`을 사용하도록 설정 |
+
+로봇의 +X는 정면, +Y는 왼쪽, +Z는 위쪽입니다.
+양의 yaw는 위에서 내려다볼 때 반시계 방향입니다.
+지도 생성 전과 저장 지도 주행 전에 같은 위치·방향으로 새로 생성하는 것이 핵심입니다.
+Gazebo에서 로봇을 옮겼다고 AMCL 초기값이 자동으로 갱신되지는 않습니다.
+
+### Cartographer: 새 지도 생성의 추적 기준
+
+설정 파일은 `ros_dd_cartographer/config/ros_dd_cartographer.lua`입니다.
+
+| Lua 파라미터 | 현재 값 | 의미 및 주의점 |
+| --- | --- | --- |
+| `map_frame` | `"map"` | SLAM 결과를 표현하는 지도 프레임 이름. 원점의 숫자 좌표를 넣는 항목은 아님 |
+| `tracking_frame` | `"base_footprint"` | SLAM이 추적하는 로봇 기준. 시작 시 로봇 중심을 기준으로 삼도록 지정 |
+| `published_frame` | `"odom"` | 현재 구성에서 Cartographer가 map 기준 자세를 제공하는 프레임 |
+| `odom_frame` | `"odom"` | Cartographer가 오도메트리 프레임을 제공하는 구성에서 사용하는 이름. 현재는 Gazebo가 해당 TF 연결을 제공 |
+| `provide_odom_frame` | `false` | Gazebo가 제공하는 `odom -> base_footprint`와 중복되는 오도메트리 TF 구성을 피함 |
+| `use_odometry` | `true` | 바퀴 오도메트리 정보를 SLAM에 사용. world와 map을 강제로 일치시키는 옵션은 아님 |
+| `publish_frame_projected_to_2d` | `true` | 발행 자세를 바닥의 2D 이동에 맞게 투영 |
+| `TRAJECTORY_BUILDER_2D.use_imu_data` | `false` | 현재 2D SLAM에서 IMU를 사용하지 않음. IMU를 켤 때는 추적 프레임 등 요구 조건을 다시 검토 |
+
+`tracking_frame="laser_link"`와 `tracking_frame="base_footprint"`는 기준 위치가 다릅니다.
+URDF의 `laser_joint`에는 LiDAR의 장착 위치와 방향이 들어 있습니다.
+이 값을 화면의 오차를 없애기 위해 임의로 변경하면 센서와 로봇의 실제 기하 관계가 틀어집니다.
+
+`map_frame`과 `tracking_frame`을 정했다고 Gazebo 생성 좌표를 자동으로 읽는 것은 아닙니다.
+새 SLAM을 시작할 때 로봇을 world 원점에 정지시켜 두고 시작 TF를 확인해야 합니다.
+
+### AMCL: 저장 지도에서의 초기 위치
+
+설정 파일은 `ros_dd_navigation/config/nav2_params.yaml`의
+`amcl -> ros__parameters` 영역입니다. 아래 항목은 모두 그 영역에 둡니다.
+
+| YAML 파라미터 | 현재 값 | 의미 및 주의점 |
+| --- | --- | --- |
+| `global_frame_id` | `map` | 위치 추정의 지도 기준 프레임 |
+| `odom_frame_id` | `odom` | 이동량 추정에 사용하는 오도메트리 프레임 |
+| `base_frame_id` | `base_footprint` | AMCL이 위치를 추정하는 로봇 기준 프레임 |
+| `set_initial_pose` | `true` | 활성화 시 아래 초기 위치를 자동 입력. 수동 2D Pose Estimate 생략에 필요 |
+| `initial_pose.x` | `0.0` | map 기준 로봇 시작 X 위치(m) |
+| `initial_pose.y` | `0.0` | map 기준 로봇 시작 Y 위치(m) |
+| `initial_pose.z` | `0.0` | 2D 위치 추정에서 사용하는 초기 Z 값 |
+| `initial_pose.yaw` | `0.0` | map 기준 로봇 시작 방향(rad) |
+| `tf_broadcast` | `true` | AMCL이 `map -> odom` TF를 발행 |
+| `scan_topic` | `scan` | 지도와 비교할 LiDAR 관측 토픽 |
+| `use_sim_time` | `true` | 시뮬레이션의 센서·TF와 같은 시간 기준 사용 |
+
+표의 `initial_pose.x` 등은 ROS의 파라미터 이름입니다.
+YAML에는 앞 절의 예제처럼 `initial_pose:` 아래에 `x`, `y`, `z`, `yaw`를 들여써도 됩니다.
+방향 변환은 `rad = degree × π / 180`이며, 30도는 약 `0.523599`, 90도는 약 `1.570796`입니다.
+
+**AMCL 초기값은 Gazebo 좌표가 아니라 map 좌표입니다.**
+이 문서의 절차에서는 두 기준을 맞춰 시작했기 때문에 같은 0 값을 사용할 수 있습니다.
+다른 위치에서 시작하거나 이전 지도에 방향 오차가 있으면 그 지도에 맞는 초기값이 필요합니다.
+초기값 자동 입력은 정확한 위치 추정의 완료를 뜻하지 않으므로 LaserScan 정렬도 확인합니다.
+
+### 지도 파일과 실행 파일 선택
+
+| 항목 | 의미 및 확인 사항 |
+| --- | --- |
+| 지도 YAML의 `image` | 실제 지도 이미지 경로. YAML과 해당 이미지가 함께 있어야 함 |
+| 지도 YAML의 `resolution` | 픽셀 한 칸의 실제 길이(m/pixel). 원점 조정 목적으로 변경하지 않음 |
+| 지도 YAML의 `origin` | 지도 이미지의 격자 원점이 map에서 갖는 `[x, y, yaw]`. 로봇 초기 위치와 별개 |
+| Navigation의 `map` | 사용할 지도 YAML 경로. 생략하여 의도하지 않은 기본 지도를 읽지 않도록 명시 |
+| Navigation의 `params_file` | AMCL과 Nav2가 실제 읽을 YAML 경로. 원본 경로를 명시하면 수정 파일을 직접 사용 |
+| Navigation의 `use_localization` | 저장 지도 + AMCL은 `true`, Cartographer가 위치 추정 중이면 `false` |
+| Cartographer의 `cartographer_config_dir` | 실제 읽을 Lua 설정 디렉터리. 워크스페이스 혼용 방지를 위해 명시 |
+| Cartographer의 `configuration_basename` | 해당 디렉터리에서 읽을 Lua 파일 이름. 기본값은 `ros_dd_cartographer.lua` |
+
+설정을 수정한 뒤에는 파일 내용뿐 아니라 실제 읽는 경로와 실행 중 파라미터를 확인합니다.
+Lua 설치본을 사용하는 경우 빌드 후 Cartographer를 재시작하고,
+원본 YAML을 직접 지정한 경우 Navigation을 재시작합니다.
+RViz의 카메라 위치나 Grid 표시를 바꾸는 것은 지도 원점이나 AMCL 위치를 변경하지 않습니다.
