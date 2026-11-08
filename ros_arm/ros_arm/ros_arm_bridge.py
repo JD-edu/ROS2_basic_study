@@ -37,7 +37,7 @@ class JointStateSubscriber(Node):
             10
         )
         self.pub_count = 0
-        self.ser = serial.Serial("/dev/ttyACM0", baudrate = 115200, parity=serial.PARITY_NONE, 
+        self.ser = serial.Serial("/dev/ttyUSB0", baudrate = 115200, parity=serial.PARITY_NONE, 
                                stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, 
                                timeout=0.3)
    

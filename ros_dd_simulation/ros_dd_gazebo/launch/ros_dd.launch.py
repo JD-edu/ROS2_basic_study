@@ -1,36 +1,19 @@
 """Launch the Harmonic simulation directly from the saved URDF."""
 import os
 from pathlib import Path
-import shlex
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
-    ExecuteProcess,
-    OpaqueFunction,
+    IncludeLaunchDescription,
     SetEnvironmentVariable,
-    Shutdown,
 )
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 
-
-def _launch_gazebo(context):
-    """Split optional CLI flags into arguments without using a shell."""
-    return [ExecuteProcess(
-        cmd=[
-            'gz', 'sim',
-            *shlex.split(LaunchConfiguration('gz_args').perform(context)),
-            '--gui-config', LaunchConfiguration('gui_config').perform(context),
-            LaunchConfiguration('world').perform(context),
-            '--force-version', '8',
-        ],
-        name='gazebo',
-        output='screen',
-        on_exit=Shutdown(reason='Gazebo exited'),
-    )]
 
 
 def generate_launch_description():
@@ -46,13 +29,16 @@ def generate_launch_description():
             str(description_share.parent),
             os.environ.get('GZ_SIM_RESOURCE_PATH', ''),
         ]))
-    plugin_path = SetEnvironmentVariable(
-        'GZ_SIM_SYSTEM_PLUGIN_PATH', os.pathsep.join([
-            os.environ.get('GZ_SIM_SYSTEM_PLUGIN_PATH', ''),
-            os.environ.get('LD_LIBRARY_PATH', ''),
-        ]))
-
-    gazebo = OpaqueFunction(function=_launch_gazebo)
+    gazebo = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')),
+        launch_arguments={
+            'gz_args': [LaunchConfiguration('gz_args'), ' --gui-config "',
+                        LaunchConfiguration('gui_config'), '" "', LaunchConfiguration('world'), '"'],
+            'gz_version': '8',
+            'on_exit_shutdown': 'true',
+        }.items(),
+    )
 
     robot_state_publisher = Node(
         package='robot_state_publisher',
@@ -98,7 +84,6 @@ def generate_launch_description():
         DeclareLaunchArgument('gz_args', default_value='-r',
                               description='Gazebo flags; use "-r -s" for server only'),
         resource_path,
-        plugin_path,
         gazebo,
         robot_state_publisher,
         spawn_robot,

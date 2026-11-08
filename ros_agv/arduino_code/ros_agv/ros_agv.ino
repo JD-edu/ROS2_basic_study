@@ -20,164 +20,136 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN TH
 SOFTWARE.*/
 
-#include <SoftwareSerial.h>
+#include <Arduino.h>
 
-// command protocol constant 
-#define HEAD              0xf5
-#define CMD_SET_MOTOR     0x01
-#define CMD_GET_SPEED     0x02
-#define CMD_GET_ENCODER   0x03
-#define CMD_CAR_RUN       0x04
+// Existing wiring: left inputs 12/10(PWM), right inputs 13/11(PWM).
+// true: L9110 two-input bridge; false: DIR + active-high PWM interface.
+const bool L9110_MODE = true;
+const uint8_t LEFT_DIR = 12, LEFT_PWM = 10;
+const uint8_t RIGHT_DIR = 13, RIGHT_PWM = 11;
+const uint8_t LEFT_ENCODER = 2, RIGHT_ENCODER = 3;
+// Change one polarity if that wheel rotates backward for a positive command.
+const int8_t LEFT_POLARITY = 1, RIGHT_POLARITY = 1;
+const uint8_t HEAD = 0xF5, CMD_MOTOR = 0x01, CMD_ENCODER = 0x03;
+const unsigned long WATCHDOG_MS = 500, FEEDBACK_MS = 50;
 
-#define motor_A_enable 12
-#define motor_B_enable 13
-#define motor_A 10
-#define motor_B 11
+volatile uint32_t leftTicks = 0, rightTicks = 0;
+volatile int8_t leftDirection = 0, rightDirection = 0;
+unsigned long lastCommand = 0, lastFeedback = 0, lastByte = 0;
+uint8_t rx[6], used = 0;
+bool driving = false;
 
-// encoder pin definition 
-#define encoder_A 2
-#define encoder_B 3  // left from view of robot 
-
-// Using softserial as debugging. Arduino Uno has only 1 serial port. 
-SoftwareSerial Serial2(7,8);
-
-// Step 4 for motor control, in this code, using L9110 motor driver IC 
-// Using pin 5, 6 pwm enabled pins 
-void setup() {
-  Serial.begin(115200);
-  Serial2.begin(115200);
-  Serial2.println("hello...");
-  pinMode(13, OUTPUT);
-  pinMode(motor_A_enable, OUTPUT);
-  pinMode(motor_B_enable, OUTPUT);
-  pinMode(motor_A, OUTPUT);
-  pinMode(motor_B, OUTPUT);
-
-  // 엔코더 핀 입력 설정 및 인터럽트 연결
-  pinMode(encoder_A, INPUT);
-  pinMode(encoder_B, INPUT);
-  attachInterrupt(digitalPinToInterrupt(encoder_A), encoder_A_ISR, RISING); // A채널 상승 시 인터럽트 발생
-  attachInterrupt(digitalPinToInterrupt(encoder_B), encoder_B_ISR, RISING); // A채널 상승 시 인터럽트 발생
+// One pulse input per wheel: direction is inferred from the last motor command.
+// These counters cannot detect external/manual reverse motion or coasting direction.
+void leftEncoderISR() {
+  if (leftDirection > 0) ++leftTicks;
+  else if (leftDirection < 0) --leftTicks;
+}
+void rightEncoderISR() {
+  if (rightDirection > 0) ++rightTicks;
+  else if (rightDirection < 0) --rightTicks;
 }
 
-void byte_to_hex(byte a){
-  char hexString[3];
-  sprintf(hexString, "%02X", a);
-  // Serial2.println(hexString);  // for debugging 
+void setWheel(uint8_t directionPin, uint8_t pwmPin, int command) {
+  int pwm = abs(command) * 255 / 100;
+  // Zero PWM before changing direction to avoid a transient full-power command.
+  analogWrite(pwmPin, 0);
+  if (command == 0) {
+    digitalWrite(directionPin, LOW);
+    return;
+  }
+  if (L9110_MODE) {
+    // input1=LOW/input2=PWM: forward; HIGH/inverted PWM: reverse.
+    digitalWrite(directionPin, command < 0 ? HIGH : LOW);
+    analogWrite(pwmPin, command < 0 ? 255 - pwm : pwm);
+  } else {
+    digitalWrite(directionPin, command > 0 ? HIGH : LOW);
+    analogWrite(pwmPin, pwm);
+  }
 }
 
-void motorForward(int speed_A, int speed_B) {
-  digitalWrite(motor_A_enable, HIGH);
-  digitalWrite(motor_B_enable, HIGH);
-  analogWrite(motor_A, speed_A);
-  analogWrite(motor_B, speed_B);
+void setMotors(int8_t left, int8_t right) {
+  noInterrupts();
+  leftDirection = (left > 0) - (left < 0);
+  rightDirection = (right > 0) - (right < 0);
+  interrupts();
+  static int previousLeft = 101, previousRight = 101;
+  // Do not reset PWM on each heartbeat when the command has not changed.
+  if (left != previousLeft) setWheel(LEFT_DIR, LEFT_PWM, left * LEFT_POLARITY);
+  if (right != previousRight) setWheel(RIGHT_DIR, RIGHT_PWM, right * RIGHT_POLARITY);
+  previousLeft = left;
+  previousRight = right;
+  driving = left != 0 || right != 0;
 }
 
-void motorBackward(int speed_A, int speed_B) {
-  digitalWrite(motor_A_enable, LOW);
-  digitalWrite(motor_B_enable, LOW);
-  analogWrite(motor_A, speed_A);
-  analogWrite(motor_B, speed_B);
+void acceptPacket() {
+  // length = command(1) + two signed commands(2) + checksum(1).
+  uint8_t checksum = uint8_t(rx[2] + rx[3] + rx[4]);
+  int8_t left = int8_t(rx[3]), right = int8_t(rx[4]);
+  if (rx[1] == 4 && rx[2] == CMD_MOTOR && rx[5] == checksum &&
+      left >= -100 && left <= 100 && right >= -100 && right <= 100) {
+    setMotors(left, right);
+    lastCommand = millis();
+  } else {
+    setMotors(0, 0);
+  }
 }
 
-// 모터 정지 함수
-void motorStop() {
-  digitalWrite(motor_A_enable, LOW);
-  digitalWrite(motor_B_enable, LOW);
-  analogWrite(motor_A, 0);
-  analogWrite(motor_B, 0);
-}
-
-
-/* 
-Encoder variable
-We should use long data type. Arduino long data type is 4 bytes.
-Arduino int data type is 2 bytes. 
-*/
-long lf_encoder = 0;        // left front encoder value 
-long rf_encoder = 0;        // right fron encoder value 
-long lr_encoder = 0;        // left rear encoder value 
-long rr_encoder = 0;        // right rear encoder value
-
-void loop(){ 
-  // Step2 receiving and parsing of command packet from PC
-   if(Serial.available() > 0){
-    // Header byte 
-    byte c = Serial.read();   //HEAD
-    byte_to_hex(c);
-    if( c == HEAD){
-      c = Serial.read();      //length 
-      byte_to_hex(c);
-      c = Serial.read();        //command
-      byte_to_hex(c);
-      if(c == CMD_SET_MOTOR){
-        byte lf = Serial.read();    //speed 1 
-        // We use left-front wheel. ROS send speed data. It controls left-front wheel.
-        if(lf > 0){
-          go_forward(lf);
-        }else if(lf < 0){
-          go_backward(lf*-1);
-        }else{
-          stop();
-        }
-        byte_to_hex(lf);
-        byte rf = Serial.read();    //speed 2
-        byte_to_hex(rf);
-        byte lr = Serial.read();    //speed 3
-        byte_to_hex(lr);
-        byte rr = Serial.read();    //speed 4  
-        byte_to_hex(rr);
-        c = Serial.read();          // checksum   
-        byte_to_hex(c);
-        Serial2.print("Motor: ");
-        Serial2.print(lf);
-        Serial2.print(" ");
-        Serial2.print(lr);
-        Serial2.print(" ");
-        Serial2.print(rf);
-        Serial2.print(" ");
-        Serial2.println(rr);
-        
-      }
+void receiveCommands() {
+  if (used && millis() - lastByte > 50) used = 0;
+  // Bounded work preserves watchdog and feedback service under serial noise.
+  for (uint8_t budget = 0; budget < 64 && Serial.available() > 0; ++budget) {
+    uint8_t value = uint8_t(Serial.read());
+    lastByte = millis();
+    if (used == 0 && value != HEAD) continue;
+    rx[used++] = value;
+    if ((used == 2 && rx[1] != 4) || (used == 3 && rx[2] != CMD_MOTOR)) {
+      used = value == HEAD ? 1 : 0;
+      if (used) rx[0] = HEAD;
+    }
+    if (used == sizeof(rx)) {
+      acceptPacket();
+      used = 0;
     }
   }
-  // Encoder value simulation 
-  lf_encoder += 100;
-  Serial2.print( " LF:" );      // print for debugging 
-  Serial2.print( lf_encoder );
-  Serial2.print( " RF:" );
-  Serial2.print( rf_encoder );
-  Serial2.print( " LR:" );
-  Serial2.print( lr_encoder );
-  Serial2.print( " RR:" );
-  Serial2.println( rr_encoder );
- 
-  byte data_buffer[20] = {0};   // Command packer container 
-  byte i, checknum = 0;
-  data_buffer[0] = 0xf5;                          // HEADER 
-  data_buffer[1] = 19;                            // length 
-  data_buffer[2] = 0x03;                          // command 
-  data_buffer[3] = (lf_encoder >> 24) & 0xff;     // payload 
-  data_buffer[4] = (lf_encoder >> 16) & 0xff;     // long 4 bytes as byte array 
-  data_buffer[5] = (lf_encoder >> 8) & 0xff;
-  data_buffer[6] = lf_encoder & 0xff;
-  data_buffer[7] = (rf_encoder >> 24) & 0xff;
-  data_buffer[8] = (rf_encoder >> 16) & 0xff;
-  data_buffer[9] = (rf_encoder >> 8) & 0xff;
-  data_buffer[10] = rf_encoder  & 0xff;
-  data_buffer[11] = (lr_encoder >> 24) & 0xff;
-  data_buffer[12] = (lr_encoder >> 16) & 0xff;
-  data_buffer[13] = (lr_encoder >> 8) & 0xff;
-  data_buffer[14] = lr_encoder  & 0xff;
-  data_buffer[15] = (rr_encoder >> 24) & 0xff;
-  data_buffer[16] = (rr_encoder >> 16) & 0xff;
-  data_buffer[17] = (rr_encoder >> 8) & 0xff;
-  data_buffer[18] = rr_encoder  & 0xff;
- for (i = 2; i < 19; i++)
-  {
-    checknum += data_buffer[i];
+}
+
+void sendEncoders() {
+  uint32_t left, right;
+  noInterrupts();
+  left = leftTicks;
+  right = rightTicks;
+  interrupts();
+  uint8_t packet[12] = {HEAD, 10, CMD_ENCODER};
+  for (uint8_t i = 0; i < 4; ++i) {
+    packet[3 + i] = uint8_t(left >> (24 - 8 * i));
+    packet[7 + i] = uint8_t(right >> (24 - 8 * i));
   }
-  data_buffer[19] = checknum;           
-  Serial.write(data_buffer, 20);  // Sending command packets 
-  delay(500);
+  uint8_t checksum = 0;
+  for (uint8_t i = 2; i < 11; ++i) checksum += packet[i];
+  packet[11] = checksum;
+  Serial.write(packet, sizeof(packet));
+}
+
+void setup() {
+  pinMode(LEFT_DIR, OUTPUT);
+  pinMode(LEFT_PWM, OUTPUT);
+  pinMode(RIGHT_DIR, OUTPUT);
+  pinMode(RIGHT_PWM, OUTPUT);
+  setMotors(0, 0);
+  pinMode(LEFT_ENCODER, INPUT_PULLUP);
+  pinMode(RIGHT_ENCODER, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(LEFT_ENCODER), leftEncoderISR, RISING);
+  attachInterrupt(digitalPinToInterrupt(RIGHT_ENCODER), rightEncoderISR, RISING);
+  Serial.begin(115200);
+}
+
+void loop() {
+  receiveCommands();
+  unsigned long now = millis();
+  if (driving && now - lastCommand >= WATCHDOG_MS) setMotors(0, 0);
+  if (now - lastFeedback >= FEEDBACK_MS) {
+    lastFeedback = now;
+    sendEncoders();
+  }
 }

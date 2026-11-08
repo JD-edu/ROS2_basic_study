@@ -3,9 +3,14 @@
 <package format="3">
   <name>ros_agv</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Two-wheel differential-drive Arduino bring-up</description>
   <maintainer email="jd@todo.todo">jd</maintainer>
-  <license>TODO: License declaration</license>
+  <license>MIT</license>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>python3-serial</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>

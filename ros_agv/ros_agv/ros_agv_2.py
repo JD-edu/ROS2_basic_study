@@ -1,278 +1,150 @@
 #!/usr/bin/env python3
-
-"""
-MIT License
-
-Copyright (c) 2024 JD edu
-http://jdedu.kr
-Author: conner.jeong@gmail.com
-"""
-
+"""Two-wheel differential drive with encoder feedback and command watchdog."""
 import math
 import struct
-import threading
+import time
 
 import rclpy
-import serial
-
+from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import JointState
-from rclpy.node import Node
+import serial
 
-
-# ---------------------------------------------------------
-# 로봇 설정
-# ---------------------------------------------------------
-SERIAL_PORT = "/dev/ttyUSB0"
-BAUDRATE = 115200
-
-WHEEL_SEPARATION = 0.40          # 좌우 바퀴 사이 거리(m)
-MAX_LINEAR_SPEED = 0.5           # 모터 명령 100에 해당하는 속도(m/s)
-ENCODER_TICKS_PER_REVOLUTION = 1320
-
-
-class AGVSerial:
-    """AGV 제어보드와 시리얼 통신을 담당한다."""
-
-    HEAD = 0xF5
-    CMD_SET_MOTOR = 0x01
-    CMD_GET_ENCODER = 0x03
-
-    def __init__(self, port, baudrate):
-        self.ser = serial.Serial(
-            port,
-            baudrate,
-            timeout=0.1
-        )
-
-        self.left_encoder = 0
-        self.right_encoder = 0
-        self.running = True
-
-        self.thread = threading.Thread(
-            target=self.receive_data,
-            daemon=True
-        )
-        self.thread.start()
-
-        print(f"Serial opened: {port}")
-
-    def receive_data(self):
-        """제어보드에서 엔코더 패킷을 계속 읽는다."""
-
-        while self.running:
-
-            # 헤더 1바이트 읽기
-            head = self.ser.read(1)
-
-            if not head:
-                continue
-
-            if head[0] != self.HEAD:
-                continue
-
-            # 패킷 길이 읽기
-            length_data = self.ser.read(1)
-
-            if not length_data:
-                continue
-
-            length = length_data[0]
-
-            # command + payload + checksum 읽기
-            packet = self.ser.read(length)
-
-            if len(packet) != length:
-                continue
-
-            command = packet[0]
-            payload = packet[1:-1]
-
-            if command == self.CMD_GET_ENCODER:
-                self.parse_encoder(payload)
-
-    def parse_encoder(self, payload):
-        """왼쪽과 오른쪽 엔코더 값을 읽는다."""
-
-        if len(payload) < 8:
-            return
-
-        self.left_encoder = int.from_bytes(
-            payload[0:4],
-            byteorder="big",
-            signed=True
-        )
-
-        self.right_encoder = int.from_bytes(
-            payload[4:8],
-            byteorder="big",
-            signed=True
-        )
-
-    def set_motor(self, left_speed, right_speed):
-        """좌우 모터에 -100~100 범위의 속도를 전송한다."""
-
-        left_speed = max(-100, min(100, int(left_speed)))
-        right_speed = max(-100, min(100, int(right_speed)))
-
-        motor_data = struct.pack(
-            "bb",
-            left_speed,
-            right_speed
-        )
-
-        # length = command 1 + motor data 2 + checksum 1
-        length = 4
-        checksum = 0xFF
-
-        packet = bytes([
-            self.HEAD,
-            length,
-            self.CMD_SET_MOTOR
-        ]) + motor_data + bytes([checksum])
-
-        self.ser.write(packet)
-
-    def close(self):
-        """모터를 정지하고 시리얼 포트를 닫는다."""
-
-        self.set_motor(0, 0)
-        self.running = False
-
-        if self.ser.is_open:
-            self.ser.close()
+from ros_agv.protocol import CMD_ENCODER, Decoder, encoder_delta, motor_packet
+from ros_agv.protocol import wheel_commands
 
 
 class ROSAGVDriver(Node):
-    """cmd_vel을 받아 AGV를 제어하고 바퀴 상태를 발행한다."""
+    """Control left/right motors through the matching Arduino firmware."""
 
     def __init__(self):
-        super().__init__("ros_agv_driver")
+        super().__init__('ros_agv_driver')
+        defaults = {
+            'serial_port': '/dev/ttyUSB0', 'baudrate': 115200,
+            'wheel_separation': 0.40, 'max_wheel_speed': 0.5,
+            'encoder_ticks_per_revolution': 1320.0,
+            'cmd_vel_timeout': 0.3, 'encoder_timeout': 0.5,
+            'startup_delay': 2.0,
+            'left_joint_name': 'left_wheel_joint',
+            'right_joint_name': 'right_wheel_joint',
+        }
+        for name, value in defaults.items():
+            self.declare_parameter(name, value)
+        for name in ('wheel_separation', 'max_wheel_speed',
+                     'encoder_ticks_per_revolution', 'cmd_vel_timeout',
+                     'encoder_timeout'):
+            value = self.value(name)
+            if not math.isfinite(value) or value <= 0:
+                raise ValueError(f'{name} must be finite and positive')
+        if self.value('cmd_vel_timeout') >= 0.5:
+            raise ValueError('cmd_vel_timeout must be below firmware watchdog (0.5 s)')
+        delay = self.value('startup_delay')
+        if not math.isfinite(delay) or delay < 0:
+            raise ValueError('startup_delay must be finite and nonnegative')
+        self.ser = serial.Serial(self.value('serial_port'), self.value('baudrate'),
+                                 timeout=0, write_timeout=0.1)
+        try:
+            time.sleep(delay)
+            self.ser.reset_input_buffer()
+            self.ser.write(motor_packet(0, 0))
+        except Exception:
+            self.ser.close()
+            raise
+        self.decoder = Decoder()
+        self.target = (0, 0)
+        self.last_command = float('-inf')
+        self.last_encoder = float('-inf')
+        self.previous_ticks = None
+        self.positions = [0.0, 0.0]
+        self.failed = False
+        self.joint_pub = self.create_publisher(JointState, 'joint_states', 10)
+        self.subscription = self.create_subscription(
+            Twist, 'cmd_vel', self.cmd_vel_callback, 1)
+        self.timer = self.create_timer(0.02, self.update)
+        self.get_logger().info('AGV ready; waiting for encoder feedback')
 
-        self.agv = AGVSerial(
-            SERIAL_PORT,
-            BAUDRATE
-        )
-
-        # cmd_vel 구독
-        self.create_subscription(
-            Twist,
-            "/cmd_vel",
-            self.cmd_vel_callback,
-            10
-        )
-
-        # joint_states 발행
-        self.joint_pub = self.create_publisher(
-            JointState,
-            "/joint_states",
-            10
-        )
-
-        # 20Hz로 JointState 발행
-        self.create_timer(
-            0.05,
-            self.publish_joint_states
-        )
-
-        self.get_logger().info("ROS AGV driver started")
+    def value(self, name):
+        """Read a startup parameter."""
+        return self.get_parameter(name).value
 
     def cmd_vel_callback(self, msg):
-        """cmd_vel을 좌우 모터 속도로 변환한다."""
+        """Convert m/s and rad/s to proportionally limited motor commands."""
+        if self.failed:
+            return
+        if not all(math.isfinite(v) for v in (msg.linear.x, msg.angular.z)):
+            self.target = (0, 0)
+            self.last_command = float('-inf')
+            self.get_logger().error('Rejected non-finite cmd_vel')
+            return
+        self.target = wheel_commands(msg.linear.x, msg.angular.z,
+                                     self.value('wheel_separation'),
+                                     self.value('max_wheel_speed'))
+        self.last_command = time.monotonic()
 
-        linear = msg.linear.x
-        angular = msg.angular.z
-
-        # 차동구동 로봇의 좌우 바퀴 속도
-        left_velocity = (
-            linear
-            - angular * WHEEL_SEPARATION / 2.0
-        )
-
-        right_velocity = (
-            linear
-            + angular * WHEEL_SEPARATION / 2.0
-        )
-
-        # m/s를 -100~100 모터 명령으로 변환
-        left_motor = (
-            left_velocity
-            / MAX_LINEAR_SPEED
-            * 100
-        )
-
-        right_motor = (
-            right_velocity
-            / MAX_LINEAR_SPEED
-            * 100
-        )
-
-        self.agv.set_motor(
-            left_motor,
-            right_motor
-        )
-
-        self.get_logger().info(
-            f"left={int(left_motor)}, "
-            f"right={int(right_motor)}"
-        )
-
-    def publish_joint_states(self):
-        """엔코더 값을 바퀴 회전각으로 변환해 발행한다."""
-
-        radians_per_tick = (
-            2.0 * math.pi
-            / ENCODER_TICKS_PER_REVOLUTION
-        )
-
-        left_position = (
-            self.agv.left_encoder
-            * radians_per_tick
-        )
-
-        right_position = (
-            self.agv.right_encoder
-            * radians_per_tick
-        )
-
-        msg = JointState()
-
-        msg.header.stamp = (
-            self.get_clock().now().to_msg()
-        )
-
-        msg.name = [
-            "left_wheel_joint",
-            "right_wheel_joint"
-        ]
-
-        msg.position = [
-            left_position,
-            right_position
-        ]
-
-        self.joint_pub.publish(msg)
+    def update(self):
+        """Receive feedback and refresh the firmware watchdog without threads."""
+        if self.failed:
+            return
+        now = time.monotonic()
+        try:
+            for command, payload in self.decoder.feed(self.ser.read(4096)):
+                if command != CMD_ENCODER or len(payload) != 8:
+                    continue
+                ticks = struct.unpack('>ii', payload)
+                if self.previous_ticks is None:
+                    self.previous_ticks = ticks
+                scale = 2 * math.pi / self.value('encoder_ticks_per_revolution')
+                for i in range(2):
+                    self.positions[i] += encoder_delta(
+                        ticks[i], self.previous_ticks[i]) * scale
+                self.previous_ticks = ticks
+                self.last_encoder = now
+                msg = JointState()
+                msg.header.stamp = self.get_clock().now().to_msg()
+                msg.name = [self.value('left_joint_name'), self.value('right_joint_name')]
+                msg.position = list(self.positions)
+                self.joint_pub.publish(msg)
+            fresh = (now - self.last_command < self.value('cmd_vel_timeout') and
+                     now - self.last_encoder < self.value('encoder_timeout'))
+            self.ser.write(motor_packet(*(self.target if fresh else (0, 0))))
+        except (serial.SerialException, OSError) as exc:
+            self.failed = True
+            self.target = (0, 0)
+            self.get_logger().error(
+                f'Serial failure: {exc}; firmware watchdog stops motors. Restart node.')
+            try:
+                self.ser.write(motor_packet(0, 0))
+            except (serial.SerialException, OSError):
+                pass
 
     def stop(self):
-        self.agv.close()
+        """Stop and close, including on interruption."""
+        self.timer.cancel()
+        try:
+            if self.ser.is_open:
+                self.ser.write(motor_packet(0, 0))
+        except (serial.SerialException, OSError) as exc:
+            self.get_logger().error(f'Could not send final stop: {exc}')
+        finally:
+            self.ser.close()
 
 
 def main(args=None):
+    """Run the driver."""
     rclpy.init(args=args)
-
-    node = ROSAGVDriver()
-
+    node = None
     try:
+        node = ROSAGVDriver()
         rclpy.spin(node)
-
     except KeyboardInterrupt:
         pass
-
     finally:
-        node.stop()
-        node.destroy_node()
-        rclpy.shutdown()
+        if node is not None:
+            node.stop()
+            node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
