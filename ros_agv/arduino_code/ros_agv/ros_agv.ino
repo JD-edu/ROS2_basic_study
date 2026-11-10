@@ -22,9 +22,7 @@ SOFTWARE.*/
 
 #include <Arduino.h>
 
-// Existing wiring: left inputs 12/10(PWM), right inputs 13/11(PWM).
-// true: L9110 two-input bridge; false: DIR + active-high PWM interface.
-const bool L9110_MODE = true;
+// 모터마다 방향(DIR) 핀과 속도(PWM) 핀을 사용합니다.
 const uint8_t LEFT_DIR = 12, LEFT_PWM = 10;
 const uint8_t RIGHT_DIR = 13, RIGHT_PWM = 11;
 const uint8_t LEFT_ENCODER = 2, RIGHT_ENCODER = 3;
@@ -34,80 +32,90 @@ const uint8_t HEAD = 0xF5, CMD_MOTOR = 0x01, CMD_ENCODER = 0x03;
 const unsigned long WATCHDOG_MS = 500, FEEDBACK_MS = 50;
 
 volatile uint32_t leftTicks = 0, rightTicks = 0;
-volatile int8_t leftDirection = 0, rightDirection = 0;
-unsigned long lastCommand = 0, lastFeedback = 0, lastByte = 0;
+unsigned long lastCommand = 0, lastFeedback = 0;
 uint8_t rx[6], used = 0;
 bool driving = false;
 
-// One pulse input per wheel: direction is inferred from the last motor command.
-// These counters cannot detect external/manual reverse motion or coasting direction.
-void leftEncoderISR() {
-  if (leftDirection > 0) ++leftTicks;
-  else if (leftDirection < 0) --leftTicks;
-}
-void rightEncoderISR() {
-  if (rightDirection > 0) ++rightTicks;
-  else if (rightDirection < 0) --rightTicks;
-}
+// Single-channel encoder: every pulse adds one, regardless of motor direction.
+void leftEncoderISR() { ++leftTicks; }
+void rightEncoderISR() { ++rightTicks; }
 
 void setWheel(uint8_t directionPin, uint8_t pwmPin, int command) {
   int pwm = abs(command) * 255 / 100;
-  // Zero PWM before changing direction to avoid a transient full-power command.
-  analogWrite(pwmPin, 0);
   if (command == 0) {
+    analogWrite(pwmPin, 0);
     digitalWrite(directionPin, LOW);
     return;
   }
-  if (L9110_MODE) {
-    // input1=LOW/input2=PWM: forward; HIGH/inverted PWM: reverse.
-    digitalWrite(directionPin, command < 0 ? HIGH : LOW);
-    analogWrite(pwmPin, command < 0 ? 255 - pwm : pwm);
+  // 양수는 전진, 음수는 후진입니다.
+  if (command > 0) {
+    digitalWrite(directionPin, HIGH);
   } else {
-    digitalWrite(directionPin, command > 0 ? HIGH : LOW);
-    analogWrite(pwmPin, pwm);
+    digitalWrite(directionPin, LOW);
   }
+  analogWrite(pwmPin, pwm);
 }
 
+// left, right: -100(후진) ~ 0(정지) ~ 100(전진)
 void setMotors(int8_t left, int8_t right) {
-  noInterrupts();
-  leftDirection = (left > 0) - (left < 0);
-  rightDirection = (right > 0) - (right < 0);
-  interrupts();
-  static int previousLeft = 101, previousRight = 101;
-  // Do not reset PWM on each heartbeat when the command has not changed.
-  if (left != previousLeft) setWheel(LEFT_DIR, LEFT_PWM, left * LEFT_POLARITY);
-  if (right != previousRight) setWheel(RIGHT_DIR, RIGHT_PWM, right * RIGHT_POLARITY);
-  previousLeft = left;
-  previousRight = right;
-  driving = left != 0 || right != 0;
+  // 왼쪽과 오른쪽 모터에 각각 속도를 전달합니다.
+  setWheel(LEFT_DIR, LEFT_PWM, left * LEFT_POLARITY);
+  setWheel(RIGHT_DIR, RIGHT_PWM, right * RIGHT_POLARITY);
+
+  // 두 모터가 모두 0이면 정지 상태입니다.
+  if (left == 0 && right == 0) {
+    driving = false;
+  } else {
+    driving = true;
+  }
 }
 
 void acceptPacket() {
-  // length = command(1) + two signed commands(2) + checksum(1).
-  uint8_t checksum = uint8_t(rx[2] + rx[3] + rx[4]);
-  int8_t left = int8_t(rx[3]), right = int8_t(rx[4]);
-  if (rx[1] == 4 && rx[2] == CMD_MOTOR && rx[5] == checksum &&
-      left >= -100 && left <= 100 && right >= -100 && right <= 100) {
-    setMotors(left, right);
-    lastCommand = millis();
-  } else {
+  // rx: [헤더, 길이, 명령, 왼쪽 속도, 오른쪽 속도, 체크섬]
+
+  // 1. 길이와 명령을 확인합니다.
+  if (rx[1] != 4 || rx[2] != CMD_MOTOR) {
     setMotors(0, 0);
+    return;
   }
+
+  // 2. 명령과 두 속도의 합으로 체크섬을 확인합니다.
+  // uint8_t에 저장하면 합의 하위 8비트(0~255)만 남습니다.
+  uint8_t checksum = rx[2] + rx[3] + rx[4];
+  if (rx[5] != checksum) {
+    setMotors(0, 0);
+    return;
+  }
+
+  // 3. 속도를 음수가 가능한 값으로 읽고 범위를 확인합니다.
+  int8_t left = (int8_t)rx[3];
+  int8_t right = (int8_t)rx[4];
+  if (left < -100 || left > 100 || right < -100 || right > 100) {
+    setMotors(0, 0);
+    return;
+  }
+
+  // 4. 모터를 제어하고 마지막 명령 시간을 기록합니다.
+  setMotors(left, right);
+  lastCommand = millis();
 }
 
 void receiveCommands() {
-  if (used && millis() - lastByte > 50) used = 0;
-  // Bounded work preserves watchdog and feedback service under serial noise.
-  for (uint8_t budget = 0; budget < 64 && Serial.available() > 0; ++budget) {
-    uint8_t value = uint8_t(Serial.read());
-    lastByte = millis();
-    if (used == 0 && value != HEAD) continue;
-    rx[used++] = value;
-    if ((used == 2 && rx[1] != 4) || (used == 3 && rx[2] != CMD_MOTOR)) {
-      used = value == HEAD ? 1 : 0;
-      if (used) rx[0] = HEAD;
+  // 수신된 데이터가 있을 때만 한 바이트 읽습니다.
+  if (Serial.available() > 0) {
+    uint8_t value = Serial.read();
+
+    // 패킷의 첫 바이트는 반드시 헤더(0xF5)여야 합니다.
+    if (used == 0 && value != HEAD) {
+      return;
     }
-    if (used == sizeof(rx)) {
+
+    // 읽은 바이트를 차례대로 저장합니다.
+    rx[used] = value;
+    used++;
+
+    // 6바이트가 모이면 명령을 처리하고 다음 패킷을 받습니다.
+    if (used == 6) {
       acceptPacket();
       used = 0;
     }

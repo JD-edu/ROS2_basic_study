@@ -1,3 +1,5 @@
+from glob import glob
+
 from setuptools import find_packages, setup
 
 package_name = 'ros_agv'
@@ -11,6 +13,9 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name, ['README.md']),
+        ('share/' + package_name + '/launch', glob('launch/*.launch.py')),
+        ('share/' + package_name + '/urdf', glob('urdf/*.urdf')),
+        ('share/' + package_name + '/rviz', glob('rviz/*.rviz')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -25,8 +30,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'ros_agv = ros_agv.ros_agv_2:main',
-            'ros_agv_2 = ros_agv.ros_agv_2:main',
+            'ros_agv = ros_agv.ros_agv:main',
+            'teleop = ros_agv.teleop:main',
         ],
     },
 )

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!-- Example geometry in meters; replace dimensions with actual measurements.
+     Wheel separation matches WHEEL_SEPARATION=0.40 in ros_agv.py. -->
+<robot name="ros_agv">
+  <material name="body_blue"><color rgba="0.15 0.4 0.8 1"/></material>
+  <material name="wheel_gray"><color rgba="0.2 0.2 0.2 1"/></material>
+  <material name="marker"><color rgba="1 0.7 0.1 1"/></material>
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.12"/>
+      <geometry><box size="0.40 0.32 0.12"/></geometry>
+      <material name="body_blue"/>
+    </visual>
+    <!-- Front marker indicates +X. -->
+    <visual>
+      <origin xyz="0.17 0 0.185"/>
+      <geometry><box size="0.04 0.12 0.01"/></geometry>
+      <material name="marker"/>
+    </visual>
+  </link>
+  <link name="left_wheel_link">
+    <visual>
+      <origin rpy="1.57079632679 0 0"/>
+      <geometry><cylinder radius="0.075" length="0.04"/></geometry>
+      <material name="wheel_gray"/>
+    </visual>
+    <visual>
+      <origin xyz="0.0375 0.021 0"/>
+      <geometry><box size="0.075 0.003 0.008"/></geometry>
+      <material name="marker"/>
+    </visual>
+  </link>
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/><child link="left_wheel_link"/>
+    <origin xyz="0 0.20 0.075"/><axis xyz="0 1 0"/>
+  </joint>
+  <link name="right_wheel_link">
+    <visual>
+      <origin rpy="1.57079632679 0 0"/>
+      <geometry><cylinder radius="0.075" length="0.04"/></geometry>
+      <material name="wheel_gray"/>
+    </visual>
+    <visual>
+      <origin xyz="0.0375 -0.021 0"/>
+      <geometry><box size="0.075 0.003 0.008"/></geometry>
+      <material name="marker"/>
+    </visual>
+  </link>
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/><child link="right_wheel_link"/>
+    <origin xyz="0 -0.20 0.075"/><axis xyz="0 1 0"/>
+  </joint>
+</robot>

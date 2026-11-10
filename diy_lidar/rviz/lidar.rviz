@@ -1,0 +1,51 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Fixed Frame: laser_frame
+    Background Color: 16; 25; 35
+    Frame Rate: 30
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid (1 m)
+      Enabled: true
+      Cell Size: 1
+      Plane Cell Count: 12
+      Plane: XY
+      Reference Frame: <Fixed Frame>
+      Color: 70; 90; 110
+    - Class: rviz_default_plugins/Axes
+      Name: Sensor Axes
+      Enabled: true
+      Reference Frame: <Fixed Frame>
+      Length: 0.5
+      Radius: 0.02
+    - Class: rviz_default_plugins/LaserScan
+      Name: Lidar Scan
+      Enabled: true
+      Topic:
+        Value: /scan
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 5
+      Style: Points
+      Size (Pixels): 4
+      Color Transformer: FlatColor
+      Color: 81; 235; 190
+      Decay Time: 0
+      Use Fixed Frame: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/TopDownOrtho
+      Name: Top View
+      Target Frame: <Fixed Frame>
+      Scale: 75
+      Angle: 0
+      X: 0
+      Y: 0
+Window Geometry:
+  Width: 1100
+  Height: 850
